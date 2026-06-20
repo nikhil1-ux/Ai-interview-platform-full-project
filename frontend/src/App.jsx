@@ -1,0 +1,22 @@
+import {Home} from "./pages/Home.jsx"
+import './App.css'
+
+import { RouterProvider } from "react-router-dom"
+import router from "./routing/Rounting.jsx"
+
+
+
+
+
+function App() {
+ 
+
+  return (
+   
+      <RouterProvider router={router}/>
+    
+    
+  )
+}
+
+export default App

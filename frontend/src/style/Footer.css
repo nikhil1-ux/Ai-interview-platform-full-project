@@ -1,0 +1,32 @@
+footer {
+  background-color: #111827; /* Dark background */
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.footer h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.footer p {
+  color: #d1d5db;
+  margin: 8px 0;
+  font-size: 0.95rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .footer {
+    padding: 30px 15px;
+  }
+
+  .footer h2 {
+    font-size: 1.5rem;
+  }
+
+  .footer p {
+    font-size: 0.9rem;
+  }
+}
