@@ -1,23 +1,87 @@
 import mongoose from "mongoose"
 
-const userSchema = mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
       trim: true,
-     }, email: {
+    },
+    email: {
       type: String,
       required: true,
       unique: true,
+      lowercase: true,
+      trim: true,
     },
     password: {
       type: String,
       required: true,
+      minlength: 6,
+    },
+    role: {
+      type: String,
+      enum: ["candidate", "recruiter" ],
+      default: "candidate",
+    },
+    isEmailVerified: {
+      type: Boolean,
+      default: false,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
+);
 
-)
+
+userSchema.pre("save", async function (next) {
+
+  if (!this.isModified("password")) return next();
+
+  try {
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+userSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
+userSchema.methods.generateAccessToken = function () {
+  return jwt.sign(
+    {
+      _id: this._id,
+      email: this.email,
+      name: this.name,
+      role: this.role,
+    },
+    process.env.JWT_ACCESS_SECRET,
+    process.env.ACCESS_EXPIRY,
+  );
+};
+
+userSchema.methods.generateRefreshToken = function () {
+  return jwt.sign(
+    { _id: this._id },
+    process.env.JWT_REFRESH_SECRET,
+     process.env.REFRESH_EXPIRY,
+    
+  );
+};
+
+userSchema.methods.generateTokens = function () {
+  return {
+    accessToken: this.generateAccessToken(),
+    refreshToken: this.generateRefreshToken(),
+  };
+};
+
+userSchema.methods.toJSON = function () {
+  const user = this.toObject();
+  delete user.password;
+  return user;
+};
 
 export const User = mongoose.model("User",userSchema);
