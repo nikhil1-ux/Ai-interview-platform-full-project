@@ -62,56 +62,15 @@ export const login = asyncHandler(async (req, res) => {
     throw new ApiError(401, "Invalid credentials");
   }
 
-  res.status(200).json({
+  return res.status(200).json({
     success: true,
     message: "Login successful",
-    token,
+    
     user,
   });
 });
 
-export const login = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
 
-  // Validation
-  if (!email || !password) {
-    throw new ApiError(400, "Email and password required");
-  }
-
-  // Find user
-  const user = await User.findOne({ email });
-  if (!user) {
-    throw new ApiError(401, "Invalid email or password");
-  }
-
-  // Compare password using model method
-  const isPasswordCorrect = await user.comparePassword(password);
-  if (!isPasswordCorrect) {
-    throw new ApiError(401, "Invalid email or password");
-  }
-
-  // Generate tokens using model method
-  const { accessToken, refreshToken } = user.generateTokens();
-
-  // Set refresh token in cookie
-  res.cookie("refreshToken", refreshToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  });
-
-  return res.status(200).json(
-    new ApiResponse(
-      200,
-      {
-        accessToken,
-        user: user.toJSON(), // Password automatically hidden
-      },
-      "User logged in successfully"
-    )
-  );
-});
 
 export const logout = asyncHandler(async (req, res) => {
   res.clearCookie("refreshToken");
@@ -151,4 +110,14 @@ export const refreshAccessToken = asyncHandler(async (req, res) => {
   } catch (error) {
     throw new ApiError(401, "Invalid refresh token");
   }
+});
+
+
+export const getCurrentUser = asyncHandler(async (req, res) => {
+  // req.user is set by auth middleware
+  const user = await User.findById(req.user._id);
+
+  return res.status(200).json(
+    new ApiResponse(200, user.toJSON(), "User fetched successfully")
+  );
 });

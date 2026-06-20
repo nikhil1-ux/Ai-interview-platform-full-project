@@ -1,4 +1,7 @@
 import mongoose from "mongoose"
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
 
 const userSchema = new mongoose.Schema(
   {
@@ -58,7 +61,7 @@ userSchema.methods.generateAccessToken = function () {
       role: this.role,
     },
     process.env.JWT_ACCESS_SECRET,
-    process.env.ACCESS_EXPIRY,
+       { expiresIn: process.env.ACCESS_EXPIRY } 
   );
 };
 
@@ -66,7 +69,7 @@ userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     { _id: this._id },
     process.env.JWT_REFRESH_SECRET,
-     process.env.REFRESH_EXPIRY,
+     {expiresIn: process.env.REFRESH_EXPIRY}
     
   );
 };
