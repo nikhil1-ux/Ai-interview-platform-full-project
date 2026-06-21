@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  signup,
+  registerUser,
   login,
   logout,
   refreshAccessToken,
@@ -11,7 +11,7 @@ import { verifyJWT } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 // Public routes
-router.post("/signup", signup);
+router.post("/signup", registerUser);
 router.post("/login", login);
 router.post("/refresh-token", refreshAccessToken);
 

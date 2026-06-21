@@ -4,7 +4,9 @@ import { User } from "../models/user.model.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
-export const signup = asyncHandler(async (req, res) => {
+
+
+export const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   // Validation
@@ -91,8 +93,15 @@ export const refreshAccessToken = asyncHandler(async (req, res) => {
       throw new ApiError(401, "User not found");
     }
 
+    if (refreshToken !== user.refreshToken) {
+  throw new ApiError(401, "Refresh token expired or reused");
+}
+
     // Generate new tokens using model method
     const { accessToken, refreshToken: newRefreshToken } = user.generateTokens();
+
+    user.refreshToken = newRefreshToken;
+await user.save({ validateBeforeSave: false });
 
     res.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,

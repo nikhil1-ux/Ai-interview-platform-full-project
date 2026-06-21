@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import "../style/Signup.css";
+import api from "../api/axios";
 
 const Signup = () => {
   const {
@@ -13,9 +14,18 @@ const Signup = () => {
   const role = watch("role", "");
   const password = watch("password");
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+ const onSubmit = async (data) => {
+  try {
+    const response = await api.post(
+      "/users/signup",
+      data
+    );
+
+    console.log(response.data);
+  } catch (error) {
+    console.log(error.response?.data);
+  }
+};
 
   return (
     <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
