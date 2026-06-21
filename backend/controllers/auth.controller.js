@@ -62,12 +62,9 @@ export const login = asyncHandler(async (req, res) => {
     throw new ApiError(401, "Invalid credentials");
   }
 
-  return res.status(200).json({
-    success: true,
-    message: "Login successful",
-    
-    user,
-  });
+ return res.status(200).json(
+  new ApiResponse(200, {user: user.toJSON() }, "User logged in successfully")
+);
 });
 
 
