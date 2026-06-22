@@ -7,10 +7,10 @@ import ApiResponse from "../utils/ApiResponse.js";
 
 
 export const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password , role } = req.body;
 
   // Validation
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !role) {
     throw new ApiError(400, "All fields are required");
   }
 
@@ -21,7 +21,7 @@ export const registerUser = asyncHandler(async (req, res) => {
   }
 
   // Create user (password is auto-hashed by pre-save hook)
-  const user = await User.create({ name, email, password });
+  const user = await User.create({ name, email, password,role  });
 
   // Generate tokens using model method
   const { accessToken, refreshToken } = user.generateTokens();

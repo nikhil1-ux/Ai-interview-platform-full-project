@@ -17,7 +17,7 @@ const Signup = () => {
  const onSubmit = async (data) => {
   try {
     const response = await api.post(
-      "/users/signup",
+      "/auth/signup",
       data
     );
 
@@ -39,8 +39,8 @@ const Signup = () => {
           required: "Name is required",
         })}
       />
-      {errors.name && (
-        <p className="error">{errors.name.message}</p>
+      {errors.username && (
+        <p className="error">{errors.username.message}</p>
       )}
 
       {/* Email */}
