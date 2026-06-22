@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: "ai-interview-platform-full-project.vercel.app",
+  origin: "https://ai-interview-platform-full-project.vercel.app",
   credentials: true
 }));
 
