@@ -1,6 +1,7 @@
 import React from 'react'
 import "../style/Login.css"
 import { useNavigate } from 'react-router-dom';
+import api from '../api/axios';
 
 import { useForm } from "react-hook-form";
 
@@ -15,18 +16,30 @@ const Login = () => {
 
 const navigate = useNavigate();
 
-const onSubmit = (data)=>{
+const onSubmit = async (data)=>{
 
-  localStorage.setItem("token","demo-token");
-  localStorage.setItem("role",data.role)
-  
-   if (data.role === "student") {
-      navigate("/student-dashboard");
-    } else {
-      navigate("/recruiter-dashboard");
-    }
+  try {
+    const response = await api.post("/auth/login",{
+      email: data.email,
+      password: data.password,
+      role: data.role,
 
-};
+    })
+
+    localStorage.setItem( "accessToken", response.data.data.accessToken ); // Save role (optional) 
+
+    localStorage.setItem("role", data.role); 
+    // Navigate
+     if (data.role === "student") 
+      { navigate("/student-dashboard"); } 
+     else 
+      { navigate("/recruiter-dashboard"); }
+
+  } 
+  catch (error) {
+    console.log(error.response?.data);
+  }
+}
 
 
   return (
