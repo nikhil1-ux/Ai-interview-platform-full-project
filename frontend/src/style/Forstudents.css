@@ -1,0 +1,403 @@
+/* For Students Section */
+.for-students {
+  padding: 5rem 1.5rem;
+  background: white;
+}
+
+.students-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Right Side */
+.students-right h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 1rem 0;
+}
+
+.students-intro {
+  font-size: 1.125rem;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+  max-width: 500px;
+}
+
+/* Features List */
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.feature-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  background: #f8fafc;
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  background: #f0f9ff;
+  border-color: #bfdbfe;
+  transform: translateX(5px);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+}
+
+.feature-content h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+}
+
+.feature-content p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Left Side - Mockup */
+.students-left {
+  position: relative;
+}
+
+.student-mockup {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mockup-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.mockup-top h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.session-badge {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Interview Card */
+.interview-card {
+  background: #f8fafc;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.question-header h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.timer {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ff8c00;
+}
+
+.question-text {
+  font-size: 1rem;
+  color: #0f172a;
+  line-height: 1.6;
+  margin: 0.75rem 0;
+  font-weight: 500;
+}
+
+.recording-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: #ff3333;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #fee2e2;
+  border-radius: 0.5rem;
+}
+
+.recording-dot {
+  width: 8px;
+  height: 8px;
+  background: #ff3333;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0.3;
+  }
+}
+
+/* Interview Stats */
+.interview-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.interview-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+}
+
+.stat-icon {
+  font-size: 1.75rem;
+}
+
+.interview-stat p {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0 0 0.25rem 0;
+  font-weight: 600;
+}
+
+.interview-stat span {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1e40af;
+  margin: 0;
+}
+
+/* =============== RESPONSIVE DESIGN =============== */
+
+@media (max-width: 1024px) {
+  .students-content {
+    gap: 3rem;
+  }
+
+  .students-right h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .for-students {
+    padding: 3rem 1rem;
+  }
+
+  .students-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .students-right h2 {
+    font-size: 1.75rem;
+  }
+
+  .students-intro {
+    font-size: 1rem;
+  }
+
+  .features-list {
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .feature-item {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .feature-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.5rem;
+  }
+
+  .feature-content h4 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .feature-content p {
+    font-size: 0.85rem;
+  }
+
+  .student-mockup {
+    padding: 1.25rem;
+  }
+
+  .mockup-top h3 {
+    font-size: 1.1rem;
+  }
+
+  .interview-card {
+    padding: 1rem;
+  }
+
+  .question-header h4 {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .for-students {
+    padding: 2rem 1rem;
+  }
+
+  .students-right h2 {
+    font-size: 1.5rem;
+  }
+
+  .students-intro {
+    font-size: 0.95rem;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .features-list {
+    margin: 1.5rem 0;
+  }
+
+  .feature-item {
+    padding: 0.75rem;
+  }
+
+  .feature-content h4 {
+    font-size: 0.95rem;
+  }
+
+  .feature-content p {
+    font-size: 0.8rem;
+  }
+
+  .student-mockup {
+    padding: 1rem;
+  }
+
+  .interview-card {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .question-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .question-text {
+    font-size: 0.95rem;
+  }
+
+  .interview-stats {
+    gap: 0.75rem;
+  }
+
+  .interview-stat {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .for-students {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .students-right h2 {
+    font-size: 1.25rem;
+  }
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+
+  .feature-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .student-mockup {
+    padding: 0.75rem;
+  }
+
+  .mockup-top h3 {
+    font-size: 1rem;
+  }
+
+  .session-badge {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .interview-card {
+    padding: 0.75rem;
+  }
+
+  .question-text {
+    font-size: 0.9rem;
+  }
+}

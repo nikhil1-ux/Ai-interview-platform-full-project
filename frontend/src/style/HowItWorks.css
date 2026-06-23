@@ -1,58 +1,302 @@
-
+/* How It Works Section */
 .how-it-works {
-  padding: 80px 10%;
+  padding: 5rem 1.5rem;
+  background: white;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Section Header */
+.section-header {
   text-align: center;
-  background-color: #f8fafc;
+  margin-bottom: 4rem;
 }
 
-.how-it-works h2 {
+.section-header h2 {
   font-size: 2.5rem;
-  margin-bottom: 50px;
-  color: #1e293b;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 1rem 0;
 }
 
+.section-header p {
+  font-size: 1.125rem;
+  color: #64748b;
+  margin: 0;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+/* Workflows */
+.workflows {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.workflow {
+  background: #f8fafc;
+  padding: 2.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid #e2e8f0;
+}
+
+/* Workflow Header */
+.workflow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.workflow-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.workflow-badge {
+  background: linear-gradient(135deg, #1e40af 0%, #0c63e4 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Steps */
 .steps {
   display: flex;
-  justify-content: center;
-  gap: 25px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 0;
 }
 
-
-.step-card {
-  background: white;
-  width: 220px;
-  padding: 30px 20px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-  transition: 0.3s;
+.step {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  position: relative;
 }
 
-.step-card:hover {
-  transform: translateY(-8px);
+.step:not(:last-child) {
+  border-bottom: 1px solid #e2e8f0;
 }
 
-
-.step-card span {
-  display: inline-flex;
+.step-number-circle {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #1e40af 0%, #0c63e4 100%);
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
-
-  width: 50px;
-  height: 50px;
-
-  border-radius: 50%;
-  background: #4f46e5;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-
-  margin-bottom: 15px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
 }
 
+.step-icon {
+  font-size: 1.75rem;
+}
 
-.step-card h3 {
-  color: #334155;
-  font-size: 1.1rem;
+.step-line {
+  position: absolute;
+  left: 29px;
+  top: calc(100% + 0px);
+  width: 2px;
+  height: 1.5rem;
+  background: linear-gradient(to bottom, #1e40af, transparent);
+}
+
+.step:last-child .step-line {
+  display: none;
+}
+
+.step-content {
+  flex: 1;
+  padding-top: 0.25rem;
+}
+
+.step-content h4 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+}
+
+.step-content p {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* =============== RESPONSIVE DESIGN =============== */
+
+@media (max-width: 1024px) {
+  .workflows {
+    gap: 3rem;
+  }
+
+  .workflow {
+    padding: 2rem;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .how-it-works {
+    padding: 3rem 1rem;
+  }
+
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .section-header p {
+    font-size: 1rem;
+  }
+
+  .workflows {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .workflow {
+    padding: 1.75rem;
+  }
+
+  .workflow-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .workflow-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .step {
+    gap: 1.25rem;
+    padding: 1.25rem 0;
+  }
+
+  .step-number-circle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .step-icon {
+    font-size: 1.5rem;
+  }
+
+  .step-line {
+    left: 24px;
+  }
+
+  .step-content h4 {
+    font-size: 1rem;
+  }
+
+  .step-content p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .how-it-works {
+    padding: 2rem 1rem;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .section-header p {
+    font-size: 0.95rem;
+  }
+
+  .workflow {
+    padding: 1.5rem;
+  }
+
+  .workflow-header h3 {
+    font-size: 1.125rem;
+  }
+
+  .workflow-badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .step {
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .step-number-circle {
+    width: 45px;
+    height: 45px;
+  }
+
+  .step-icon {
+    font-size: 1.25rem;
+  }
+
+  .step-content h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .step-content p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .how-it-works {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .section-header p {
+    font-size: 0.9rem;
+  }
+
+  .step {
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+  }
+
+  .step-number-circle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .step-icon {
+    font-size: 1.1rem;
+  }
+
+  .step-line {
+    left: 19px;
+  }
 }
