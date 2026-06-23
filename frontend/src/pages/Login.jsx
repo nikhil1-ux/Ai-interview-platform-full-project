@@ -31,7 +31,7 @@ const onSubmit = async (data)=>{
     localStorage.setItem("role", data.role); 
     // Navigate
      if (data.role === "student") 
-      { navigate("/student-dashboard"); } 
+      { navigate("/candidate-dashboard"); } 
      else 
       { navigate("/recruiter-dashboard"); }
 
