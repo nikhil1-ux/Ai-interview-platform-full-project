@@ -1,0 +1,109 @@
+/* CreateInterview.css */
+
+.createInterview {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.createInterview h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+.createInterview form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.formGroup p {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.createInterview button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.createInterview button:hover {
+  background: #1d4ed8;
+}
+
+.createInterview button:active {
+  transform: scale(0.98);
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .createInterview {
+    margin: 15px;
+    padding: 20px;
+  }
+
+  .createInterview h2 {
+    font-size: 24px;
+  }
+
+  .formGroup input,
+  .formGroup textarea,
+  .formGroup select {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .createInterview button {
+    width: 100%;
+  }
+}

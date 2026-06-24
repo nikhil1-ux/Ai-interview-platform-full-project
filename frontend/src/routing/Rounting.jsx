@@ -1,27 +1,31 @@
-import {createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter } from "react-router-dom";
 
-import Home from "../pages/Home.jsx"
-import Login from "../pages/Login.jsx"
-import Signup from "../pages/Signup.jsx"
-import ProtectedRoute from "./ProtectedRoute.jsx"
-import RecruiterDashboard from "../pages/RecruiterDashboard.jsx"
-import { CandidateDashboard } from "../pages/CandidateDashboard.jsx"
-import AssignedInterview from "../candidComponents/AssignedInterview.jsx"
-import Logout from "../candidComponents/Logout.jsx"
-import Performance from "../candidComponents/Performance.jsx"
-import Profile from "../candidComponents/Profile.jsx"
-import Ranking from "../candidComponents/Ranking.jsx"
-import Resume from "../candidComponents/Resume.jsx"
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
 
+import ProtectedRoute from "./ProtectedRoute";
 
+import RecruiterDashboard from "../pages/RecruiterDashboard";
+import { CandidateDashboard } from "../pages/CandidateDashboard";
+
+import AssignedInterview from "../candidComponents/AssignedInterview";
+import Logout from "../candidComponents/Logout";
+import Performance from "../candidComponents/Performance";
+import Profile from "../candidComponents/Profile";
+import Ranking from "../candidComponents/Ranking";
+import Resume from "../candidComponents/Resume";
+import CreateInterview from "../recruitComponent/CreateInterview";
+import RecruiterHome from "../recruitComponent/RecuiterHome";
+import CandidateHome from "../candidComponents/CandidateHome";
+import { Outlet } from "react-router-dom";
 
 const router = createBrowserRouter([
-
   {
     path: "/",
-    element: <Home/>
+    element: <Home />,
   },
-   {
+  {
     path: "/login",
     element: <Login />,
   },
@@ -29,104 +33,73 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
+
+  // 🔐 Protected Routes wrapper
   {
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/candidate-dashboard",
+        element: <CandidateDashboard />,
+        children: [
+          {
+          index: true,
+          element: <CandidateHome />
+            },
+          {
+           path:"candidatehome",
+           element:<CandidateHome/>,
+          },
 
-    path: "/candidate-dashboard",
-    element: (
-   <ProtectedRoute>
-              <CandidateDashboard />
-            </ProtectedRoute>
+        
+          {
+            path: "assigned-interviews",
+            element: <AssignedInterview />,
+          },
+          {
+            path: "performance",
+            element: <Performance />,
+          },
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+          {
+            path: "ranking",
+            element: <Ranking />,
+          },
+          {
+            path: "resume",
+            element: <Resume />,
+          },
+          {
+            path: "logout",
+            element: <Logout />,
+          },
+          {
+            path: "results",
+            element: <Performance />,
+          },
+        ],
+      },
 
-    )
+      {
+        path: "/recruiter-dashboard",
+        element: <RecruiterDashboard />,
+        children: [
+          {
+            index: true,
+            element:<RecruiterHome/>
+          },
+          {
+            path:"create-interview",
+            element:<CreateInterview/>
+          }
 
+        ]
+      },
+    ],
   },
-  {
-       path: "/recruiter-dashboard",
-    element: (
-   <ProtectedRoute>
-              <RecruiterDashboard />
-            </ProtectedRoute>
-
-    )
-  },
-  {
-
-    path: "/assigned-interviews",
-    element: (
-   <ProtectedRoute>
-              < AssignedInterview/>
-            </ProtectedRoute>
-
-    )
-
-  },
-  {
-
-    path: "/performance",
-    element: (
-   <ProtectedRoute>
-              <Performance />
-            </ProtectedRoute>
-
-    )
-
-  },
-  {
-
-    path: "/profile",
-    element: (
-   <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-
-    )
-
-  },
-  {
-
-    path: "/ranking",
-    element: (
-   <ProtectedRoute>
-              <Ranking/>
-            </ProtectedRoute>
-
-    )
-
-  },
-  {
-
-    path: "/resume",
-    element: (
-   <ProtectedRoute>
-              <Resume/>
-            </ProtectedRoute>
-
-    )
-
-  },
-  {
-
-    path: "/logout",
-    element: (
-   <ProtectedRoute>
-              <Logout/>
-            </ProtectedRoute>
-
-    )
-
-  },
-  {
-
-    path: "/results",
-    element: (
-   <ProtectedRoute>
-              <Performance/>
-            </ProtectedRoute>
-
-    )
-
-  },
- 
-
 ]);
+
 export default router;

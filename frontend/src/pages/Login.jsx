@@ -15,32 +15,34 @@ const Login = () => {
 } = useForm()
 
 const navigate = useNavigate();
-
-const onSubmit = async (data)=>{
-
-  try {
-    const response = await api.post("/auth/login",{
+const onSubmit = async (data) => {
+ 
+ try {
+    const response = await api.post("/auth/login", {
       email: data.email,
       password: data.password,
       role: data.role,
+    });
 
-    })
+    
 
-    localStorage.setItem( "accessToken", response.data.data.accessToken ); // Save role (optional) 
+    localStorage.setItem(
+      "accessToken",
+      response.data.data.accessToken
+    );
 
-    localStorage.setItem("role", data.role); 
-    // Navigate
-     if (data.role === "student") 
-      { navigate("/candidate-dashboard"); } 
-     else 
-      { navigate("/recruiter-dashboard"); }
+    localStorage.setItem("role", data.role);
 
-  } 
-  catch (error) {
-    console.log(error.response?.data);
+    if (data.role === "student") {
+      navigate("/candidate-dashboard");
+    } else {
+      navigate("/recruiter-dashboard");
+    }
+  } catch (error) {
+    console.log("Error:", error);
+    console.log("Response:", error.response?.data);
   }
-}
-
+};
 
   return (
   <form className="login-form" onSubmit={handleSubmit(onSubmit)}>

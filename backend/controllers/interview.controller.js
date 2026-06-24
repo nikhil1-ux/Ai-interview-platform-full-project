@@ -1,0 +1,1 @@
+import { Interview } from "../models/interview.model";
