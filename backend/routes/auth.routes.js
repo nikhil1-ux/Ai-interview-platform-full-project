@@ -1,4 +1,5 @@
 import express from "express";
+
 import {
   registerUser,
   login,
@@ -6,7 +7,13 @@ import {
   refreshAccessToken,
   getCurrentUser,
 } from "../controllers/auth.controller.js";
+
 import { verifyJWT } from "../middleware/auth.middleware.js";
+
+import {
+  createAndAssignInterviews,
+  getMyInterview,
+} from "../controllers/interview.controller.js";
 
 const router = express.Router();
 
@@ -15,7 +22,11 @@ router.post("/signup", registerUser);
 router.post("/login", login);
 router.post("/refresh-token", refreshAccessToken);
 
-// Protected routes (require token)
+// Interview routes
+router.post("/create", verifyJWT, createAndAssignInterviews);
+router.get("/my-interviews", verifyJWT, getMyInterview);
+
+// Protected user routes
 router.post("/logout", verifyJWT, logout);
 router.get("/me", verifyJWT, getCurrentUser);
 

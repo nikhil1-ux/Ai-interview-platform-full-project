@@ -62,10 +62,24 @@ export const login = asyncHandler(async (req, res) => {
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
     throw new ApiError(401, "Invalid credentials");
+    
   }
+    const { accessToken, refreshToken } = user.generateTokens();
+
+  // store refresh token in DB
+  user.refreshToken = refreshToken;
+  await user.save({ validateBeforeSave: false });
+
+  // send refresh token in cookie
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
 
  return res.status(200).json(
-  new ApiResponse(200, {user: user.toJSON() }, "User logged in successfully")
+  new ApiResponse(200, {accessToken,user: user.toJSON() }, "User logged in successfully")
 );
 });
 

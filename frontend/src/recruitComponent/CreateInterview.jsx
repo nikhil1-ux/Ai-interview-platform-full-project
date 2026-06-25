@@ -12,16 +12,19 @@ const CreateInterview = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      
+  try {
+    const response = await api.post(
+      "/auth/create",
+      data
+    );
 
-      alert("Interview Created Successfully");
-      reset();
-    } catch (error) {
-      console.log(error);
-      alert("Failed to create interview");
-    }
-  };
+    alert("Interview Created Successfully");
+
+    reset();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   return (
     <div className="createInterview">

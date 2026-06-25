@@ -23,13 +23,17 @@ const onSubmit = async (data) => {
       password: data.password,
       role: data.role,
     });
-
     
 
     localStorage.setItem(
       "accessToken",
       response.data.data.accessToken
     );
+ 
+    console.log(
+  "Stored:",
+  localStorage.getItem("accessToken")
+   );
 
     localStorage.setItem("role", data.role);
 
