@@ -33,23 +33,19 @@ export const createAndAssignInterviews = asyncHandler(async(req,res)=>{
     candidateId: candidate._id,
   });
 
+await sendEmail({
+  to: candidate.email,
+  subject: "Interview Invitation",
+  html: `
+    <h2>Hello ${candidate.name}</h2>
 
-  
-       await sendEmail(
-         candidate.email,
-         "Interview Invitation",
-         `
-         <h2>Hello ${candidate.name}</h2>
- 
-         <p>Your interview has been scheduled.</p>
- 
-         <p>Role : ${interview.role}</p>
- 
-         <p>Duration : ${interview.duration} mins</p>
- 
-        
-         `
-     );
+    <p>Your interview has been scheduled.</p>
+
+    <p>Role: ${interview.role}</p>
+
+    <p>Duration: ${interview.duration} mins</p>
+  `,
+});
  
 
   return res.status(201).json(
