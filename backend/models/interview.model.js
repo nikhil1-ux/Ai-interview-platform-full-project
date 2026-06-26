@@ -37,7 +37,7 @@ const interviewSchema = new mongoose.Schema(
 
     },
 
-    candidateEmail: {
+    email: {
       type: String,
       required: true,
     },

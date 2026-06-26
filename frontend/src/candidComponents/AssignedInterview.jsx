@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import api from "../api"; // your axios instance
+import api from '../api/axios.js';
 
 const AssignedInterview = () => {
   const [interviews, setInterviews] = useState([]);
@@ -7,7 +7,7 @@ const AssignedInterview = () => {
   useEffect(() => {
     const fetchInterviews = async () => {
       try {
-        const res = await api.get("/my-interviews");
+        const res = await api.get("/auth/my-interviews");
 
         setInterviews(res.data.data.assignments);
       } catch (error) {
