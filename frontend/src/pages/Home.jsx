@@ -6,7 +6,7 @@ import Features from "../components/Features"
 import ForCompanies from "../components/ForCompanies"
 import ForStudents from "../components/ForStudents"
 import Faq from "../components/Faq"
-import CTA from "../components/Cta"
+import Cta from "../components/Cta"
 import Footer from "../components/Footer"
 import "../App.css"
 
