@@ -5,59 +5,58 @@ import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 
-export const startInterview = asyncHandler( async(req,res)=>{
+export const startInterview = asyncHandler(async (req, res) => {
+  const assignmentId = req.params.id;
+  const userId = req.user._id;
 
- const assignmentId = req.params.id;
+  // ✅ Fetch with populate for related data
+  const assignment = await Assignment.findById(assignmentId).populate(
+    "interviewId"
+  );
 
- const assignment = await Assignment.findById(assignmentId)
-
- if(!assignment){
-  throw new ApiError(
-    404,
-    "Assignment not found",
- )
- }
-
-  if (!assignment.candidateId.equals(req.user._id)){
-    throw new ApiError(
-      403,
-      "not allowed "
-    )
+  if (!assignment) {
+    throw new ApiError(404, "Assignment not found");
   }
 
-   if (assignment.status === "completed"){
-    
-    return res
-    .status(200)
-    .json(new ApiResponse(200,"Interview already completed"))
-   }
+  // ✅ Clear authorization check
+  if (!assignment.candidateId.equals(userId)) {
+    throw new ApiError(
+      403,
+      "You are not authorized to start this interview"
+    );
+  }
 
+  // ✅ Validate interview exists
+  if (!assignment.interviewId) {
+    throw new ApiError(404, "Interview not found");
+  }
 
+  // ✅ Return error for completed interviews
+  if (assignment.status === "completed") {
+    throw new ApiError(
+      403,
+      "This interview has already been completed. You cannot start it again."
+    );
+  }
+
+  // ✅ Update status
   assignment.status = "in-progress";
   await assignment.save();
 
-    const interview = await Interview.findById(assignment.interviewId);
+  const sessionId = crypto.randomUUID();
 
-      if (!interview) {
-        throw new ApiError(
-          404,
-           "Interview not found",
-
-        )
-      }
-     const sessionId = crypto.randomUUID();
-      
-     return res.status(200
-      .json(
-        new ApiResponse(
-        200,
-        {
-        interview,
-        sessionId
+  // ✅ Fixed syntax and proper response
+  return res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        sessionId,
+        interviewId: assignment.interviewId._id,
+        interviewTitle: assignment.interviewId.title,
+        company: assignment.interviewId.company,
+        duration: assignment.interviewId.duration,
       },
-        
-        " Soon interview will be started"
+      "Interview started successfully"
     )
-      )
-     )
-      })
+  );
+});
