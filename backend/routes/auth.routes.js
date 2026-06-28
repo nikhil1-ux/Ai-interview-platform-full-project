@@ -15,6 +15,11 @@ import {
   getMyInterview,
 } from "../controllers/interview.controller.js";
 
+import {
+  startInterview
+}
+   from "../controllers/startInterview.controller.js"
+
 const router = express.Router();
 
 // Public routes
@@ -25,7 +30,7 @@ router.post("/refresh-token", refreshAccessToken);
 // Interview routes
 router.post("/create", verifyJWT, createAndAssignInterviews);
 router.get("/my-interviews", verifyJWT, getMyInterview);
-
+router.post("/assignment/:id/start",verifyJWT,startInterview);
 // Protected user routes
 router.post("/logout", verifyJWT, logout);
 router.get("/me", verifyJWT, getCurrentUser);
