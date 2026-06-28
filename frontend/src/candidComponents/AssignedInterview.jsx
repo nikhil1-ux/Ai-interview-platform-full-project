@@ -100,3 +100,4 @@ const AssignedInterview = () => {
     </div>
   );
 };
+export default AssignedInterview;
