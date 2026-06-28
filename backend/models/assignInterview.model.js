@@ -1,21 +1,37 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
-const assignmentSchema = new mongoose.Schema({
-  interviewId: { type: ObjectId, ref: "Interview", required: true },
-  candidateId: { type: ObjectId, ref: "User", required: true },
-  status: { 
-    type: String, 
-    enum: ["assigned", "in-progress", "completed"],
-    default: "assigned"
+const assignmentSchema = new mongoose.Schema(
+  {
+    interviewId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Interview",
+      required: true,
+    },
+
+    candidateId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
+    status: {
+      type: String,
+      enum: ["assigned", "accepted", "rejected"],
+      default: "assigned",
+    },
+
+    assignedAt: {
+      type: Date,
+      default: Date.now,
+    },
+
+    assignedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    },
   },
-  // ✅ NEW FIELDS
-  sessionId: { type: String, default: null, index: true },
-  startedAt: { type: Date, default: null },
-  submittedAt: { type: Date, default: null },
-  responses: [{
-    questionId: ObjectId,
-    answer: String,
-    submittedAt: Date
-  }]
-}, { timestamps: true });
+  { timestamps: true }
+);
+
 export const Assignment = mongoose.model("Assignment", assignmentSchema);

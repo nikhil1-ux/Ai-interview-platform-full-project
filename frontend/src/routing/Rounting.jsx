@@ -19,6 +19,7 @@ import CreateInterview from "../recruitComponent/CreateInterview";
 import RecruiterHome from "../recruitComponent/RecuiterHome";
 import CandidateHome from "../candidComponents/CandidateHome";
 import { Outlet } from "react-router-dom";
+import InterviewRoom from "../candidComponents/InterviewRoom";
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
             path: "results",
             element: <Performance />,
           },
+          {
+             path="/interview/:sessionId",
+             element=<InterviewRoom/>,
+          }
         ],
       },
 
