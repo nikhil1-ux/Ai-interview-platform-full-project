@@ -1,4 +1,4 @@
-import { Assignment } from "../models/assignment.model.js";
+import { Assignment } from "../models/assignInterview.model.js";
 import { Interview } from "../models/interview.model.js";
 import crypto from "crypto";
 import asyncHandler from "../utils/asyncHandler.js";

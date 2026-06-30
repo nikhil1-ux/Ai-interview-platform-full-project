@@ -1,39 +1,50 @@
 import "dotenv/config";
-import express from "express"
-
+import express from "express";
+import http from "http";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import errorMiddleware from "./middleware/error.middleware.js";
-import cookieParser from "cookie-parser";
 
-
+import { initSocket } from "./socket/socket.js";
+import { registerInterviewSocket } from "./socket/interview.socket.js";
 
 const app = express();
+const server = http.createServer(app);
 
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true
-}));
+// Socket.IO
+const io = initSocket(server);
+registerInterviewSocket(io);
+
+// Middlewares
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
+// Database
 connectDB();
 
-app.use(cookieParser());
+// Routes
 app.use("/api/v1/auth", authRoutes);
 
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
+  res.send("AI Interview Backend Running");
+});
 
-  res.send("AI Interview Backend Running")
-})
-
+// Error middleware
 app.use(errorMiddleware);
-const PORT = process.env.PORT || 8000 ;
 
-app.listen(PORT,()=>{
-  console.log(`Server running on port ${PORT}`)
-})
+const PORT = process.env.PORT || 8000;
 
-
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

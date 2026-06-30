@@ -81,10 +81,7 @@ const router = createBrowserRouter([
             path: "results",
             element: <Performance />,
           },
-          {
-             path="/interview/:sessionId",
-             element=<InterviewRoom/>,
-          }
+         
         ],
       },
 
@@ -102,7 +99,13 @@ const router = createBrowserRouter([
           }
 
         ]
+
       },
+
+       {
+      path: "/interview/:sessionId",
+      element: <InterviewRoom />,
+    },
     ],
   },
 ]);
