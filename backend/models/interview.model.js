@@ -23,7 +23,7 @@ const interviewSchema = new mongoose.Schema(
     },
 
     skills: {
-      type: String,
+      type: [String] ,
       required: true,
     },
 

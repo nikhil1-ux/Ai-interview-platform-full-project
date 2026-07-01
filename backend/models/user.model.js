@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    resumeUrl: {
+    type: String,
+    default: "",
+},
   },
   { timestamps: true }
 );
