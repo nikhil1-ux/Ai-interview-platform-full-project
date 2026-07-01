@@ -1,120 +1,196 @@
 import ai from "../config/gemini.js";
 
-export const generateQuestion = async (
+const MODEL = "gemini-2.5-flash";
+
+/**
+ * Removes markdown code blocks from Gemini responses.
+ */
+const stripJson = (text) => {
+  return text.replace(/```json|```/g, "").trim();
+};
+
+/**
+ * Generate Interview Question
+ */
+export const generateQuestion = async ({
+  jobRole,
   jobDescription,
-  resumeText,
+  skills,
+  resume,
   previousQuestions = [],
-  previousAnswer = ""
-) => {
+  previousAnswer = "",
+}) => {
   try {
     const prompt = `
 You are an experienced technical interviewer.
 
+JOB ROLE
+--------
+${jobRole}
+
 JOB DESCRIPTION
-----------------
+---------------
 ${jobDescription}
+
+REQUIRED SKILLS
+---------------
+${skills.join(", ")}
 
 CANDIDATE RESUME
 ----------------
-${resumeText}
+${resume}
 
 PREVIOUS QUESTIONS
-----------------
+------------------
 ${previousQuestions.join("\n")}
 
 LAST ANSWER
-----------------
+-----------
 ${previousAnswer}
 
 Instructions:
 
-1. Read the Job Description carefully.
-2. Read the candidate's resume carefully.
-3. Ask ONE interview question that evaluates whether the candidate is suitable for this role.
-4. Prefer questions based on the technologies, projects, and responsibilities mentioned in both the resume and job description.
-5. If the last answer is weak or incomplete, ask a relevant follow-up question.
-6. Never repeat previous questions.
-7. Keep the question under 40 words.
-8. Return ONLY the interview question.
+1. Ask only ONE interview question.
+2. Question should be based on resume.
+3. Match the job description.
+4. Do not repeat previous questions.
+5. Increase difficulty gradually.
+6. Ask practical interview questions.
+
+Return ONLY valid JSON.
+
+{
+  "question":"Your question here"
+}
 `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: MODEL,
       contents: prompt,
     });
 
-    return response.text.trim();
+    const text = stripJson(response.text);
+
+    return JSON.parse(text);
   } catch (error) {
-    console.error("Gemini Error:", error);
+    console.error("Generate Question Error:", error);
+
     throw new Error("Failed to generate interview question.");
   }
 };
 
-export const evaluateAnswer = async (
+/**
+ * Evaluate Candidate Answer
+ */
+export const evaluateAnswer = async ({
   question,
-  answer
-) => {
+  answer,
+}) => {
   try {
     const prompt = `
-You are a senior interviewer.
+You are a Senior Technical Interviewer.
 
-Question:
+QUESTION
+
 ${question}
 
-Candidate Answer:
+CANDIDATE ANSWER
+
 ${answer}
 
-Evaluate the answer.
+Evaluate the answer on:
 
-Return JSON only.
+- Technical Accuracy
+- Communication
+- Completeness
+- Problem Solving
+
+Return ONLY JSON.
 
 {
- "score":8,
- "feedback":"Good explanation with minor improvements."
+    "score":85,
+    "strengths":[
+        "Point 1",
+        "Point 2"
+    ],
+    "weaknesses":[
+        "Point 1"
+    ],
+    "feedback":"Detailed feedback"
 }
 `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: MODEL,
       contents: prompt,
     });
 
-    return JSON.parse(response.text);
+    const text = stripJson(response.text);
+
+    return JSON.parse(text);
   } catch (error) {
-    console.error(error);
-    throw new Error("Evaluation failed");
+    console.error("Evaluate Answer Error:", error);
+
+    throw new Error("Failed to evaluate candidate answer.");
   }
 };
 
-export const generateFinalReport = async (
-  responses
-) => {
+/**
+ * Generate Final Interview Report
+ */
+export const generateFinalReport = async (interviewData) => {
   try {
     const prompt = `
-You are a senior HR interviewer.
+You are an experienced HR recruiter.
 
-Interview Responses:
+Below is complete interview data.
 
-${JSON.stringify(responses)}
+${JSON.stringify(interviewData)}
 
-Generate JSON only.
+Generate
+
+1. Overall Score
+2. Technical Score
+3. Communication Score
+4. Confidence Score
+5. Hiring Recommendation
+6. Strengths
+7. Weaknesses
+8. Areas of Improvement
+
+Return ONLY JSON.
 
 {
- "overallScore":85,
- "strengths":"...",
- "weaknesses":"...",
- "recommendation":"Selected"
+    "overallScore":90,
+    "technical":88,
+    "communication":85,
+    "confidence":91,
+    "recommendation":"Hire",
+    "strengths":[
+        "Point 1",
+        "Point 2"
+    ],
+    "weaknesses":[
+        "Point 1"
+    ],
+    "improvement":[
+        "Point 1",
+        "Point 2"
+    ]
 }
 `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: MODEL,
       contents: prompt,
     });
 
-    return JSON.parse(response.text);
+    const text = stripJson(response.text);
+
+    return JSON.parse(text);
   } catch (error) {
-    console.error(error);
-    throw new Error("Report generation failed");
+    console.error("Final Report Error:", error);
+
+    throw new Error("Failed to generate final interview report.");
   }
 };
