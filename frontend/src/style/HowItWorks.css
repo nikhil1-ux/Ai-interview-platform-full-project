@@ -1,8 +1,6 @@
-/* How It Works Section */
 .how-it-works {
-  padding: 5rem 1.5rem;
-  background: white;
-  position: relative;
+  background: var(--ink-900);
+  padding: 100px 32px;
 }
 
 .container {
@@ -10,293 +8,165 @@
   margin: 0 auto;
 }
 
-/* Section Header */
 .section-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 64px;
 }
 
 .section-header h2 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #0f172a;
-  margin: 0 0 1rem 0;
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--cream);
+  margin: 0 0 12px;
 }
 
 .section-header p {
-  font-size: 1.125rem;
-  color: #64748b;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: var(--muted-on-dark);
   margin: 0;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-/* Workflows */
 .workflows {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 40px;
 }
 
 .workflow {
-  background: #f8fafc;
-  padding: 2.5rem;
-  border-radius: 1.25rem;
-  border: 1px solid #e2e8f0;
+  position: relative;
+  background: var(--paper-100);
+  border-radius: 4px;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
-/* Workflow Header */
+.workflow::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 28px;
+  width: 100px;
+  height: 20px;
+  background: var(--paper-200);
+  border-radius: 4px 4px 0 0;
+  z-index: -1;
+}
+
 .workflow-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 26px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed var(--paper-300);
 }
 
 .workflow-header h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #0f172a;
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--ink-text);
   margin: 0;
 }
 
 .workflow-badge {
-  background: linear-gradient(135deg, #1e40af 0%, #0c63e4 100%);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-/* Steps */
-.steps {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.step {
-  display: flex;
-  gap: 1.5rem;
-  padding: 1.5rem 0;
-  position: relative;
-}
-
-.step:not(:last-child) {
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.step-number-circle {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #1e40af 0%, #0c63e4 100%);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--stamp-red);
+  border: 1.5px solid var(--stamp-red);
   border-radius: 50%;
+  width: 54px;
+  height: 54px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
+  text-align: center;
+  line-height: 1.1;
+  transform: rotate(-8deg);
 }
 
-.step-icon {
-  font-size: 1.75rem;
+.steps {
+  display: flex;
+  flex-direction: column;
+}
+
+.step {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  padding-bottom: 26px;
+}
+
+.step:last-child {
+  padding-bottom: 0;
+}
+
+.step-number-circle {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: var(--ink-950);
+  border: 1px solid var(--paper-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  z-index: 1;
 }
 
 .step-line {
   position: absolute;
-  left: 29px;
-  top: calc(100% + 0px);
-  width: 2px;
-  height: 1.5rem;
-  background: linear-gradient(to bottom, #1e40af, transparent);
-}
-
-.step:last-child .step-line {
-  display: none;
-}
-
-.step-content {
-  flex: 1;
-  padding-top: 0.25rem;
+  left: 19px;
+  top: 40px;
+  width: 1px;
+  height: calc(100% - 40px);
+  background-image: linear-gradient(var(--paper-300) 60%, transparent 0%);
+  background-size: 1px 6px;
+  background-repeat: repeat-y;
 }
 
 .step-content h4 {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0 0 0.5rem 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-text);
+  margin: 6px 0 6px;
 }
 
 .step-content p {
-  font-size: 0.95rem;
-  color: #64748b;
-  margin: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
   line-height: 1.5;
+  color: var(--muted-on-paper);
+  margin: 0;
 }
 
-/* =============== RESPONSIVE DESIGN =============== */
-
-@media (max-width: 1024px) {
-  .workflows {
-    gap: 3rem;
-  }
-
-  .workflow {
-    padding: 2rem;
-  }
-
-  .section-header h2 {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .how-it-works {
-    padding: 3rem 1rem;
-  }
-
-  .section-header {
-    margin-bottom: 2.5rem;
-  }
-
-  .section-header h2 {
-    font-size: 1.75rem;
-  }
-
-  .section-header p {
-    font-size: 1rem;
-  }
-
+@media (max-width: 900px) {
   .workflows {
     grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .workflow {
-    padding: 1.75rem;
-  }
-
-  .workflow-header {
-    margin-bottom: 1.5rem;
-  }
-
-  .workflow-header h3 {
-    font-size: 1.25rem;
-  }
-
-  .step {
-    gap: 1.25rem;
-    padding: 1.25rem 0;
-  }
-
-  .step-number-circle {
-    width: 50px;
-    height: 50px;
-  }
-
-  .step-icon {
-    font-size: 1.5rem;
-  }
-
-  .step-line {
-    left: 24px;
-  }
-
-  .step-content h4 {
-    font-size: 1rem;
-  }
-
-  .step-content p {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .how-it-works {
-    padding: 2rem 1rem;
-  }
-
-  .section-header {
-    margin-bottom: 2rem;
-  }
-
-  .section-header h2 {
-    font-size: 1.5rem;
-  }
-
-  .section-header p {
-    font-size: 0.95rem;
-  }
-
-  .workflow {
-    padding: 1.5rem;
-  }
-
-  .workflow-header h3 {
-    font-size: 1.125rem;
-  }
-
-  .workflow-badge {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.75rem;
-  }
-
-  .step {
-    gap: 1rem;
-    padding: 1rem 0;
-  }
-
-  .step-number-circle {
-    width: 45px;
-    height: 45px;
-  }
-
-  .step-icon {
-    font-size: 1.25rem;
-  }
-
-  .step-content h4 {
-    font-size: 0.95rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .step-content p {
-    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 480px) {
   .how-it-works {
-    padding: 1.5rem 0.75rem;
+    padding: 64px 20px;
   }
 
   .section-header h2 {
-    font-size: 1.25rem;
+    font-size: 27px;
   }
 
-  .section-header p {
-    font-size: 0.9rem;
+  .workflow {
+    padding: 22px;
   }
 
-  .step {
-    gap: 0.75rem;
-    padding: 0.75rem 0;
-  }
-
-  .step-number-circle {
-    width: 40px;
-    height: 40px;
-  }
-
-  .step-icon {
-    font-size: 1.1rem;
-  }
-
-  .step-line {
-    left: 19px;
+  .workflow-header h3 {
+    font-size: 17px;
   }
 }

@@ -1,355 +1,259 @@
-/* For Companies Section */
 .for-companies {
-  padding: 5rem 1.5rem;
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  background: var(--ink-950);
+  padding: 100px 32px;
+}
+
+.for-companies .container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .companies-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 64px;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
-/* Left Side */
 .companies-left h2 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #0f172a;
-  margin: 0 0 1rem 0;
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--cream);
+  margin: 0 0 16px;
 }
 
 .companies-intro {
-  font-size: 1.125rem;
-  color: #475569;
+  font-family: var(--font-body);
+  font-size: 15px;
   line-height: 1.6;
-  margin: 0 0 2rem 0;
-  max-width: 500px;
+  color: var(--muted-on-dark);
+  margin: 0 0 32px;
+  max-width: 480px;
 }
 
-/* Benefits Grid */
 .benefits-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin: 2.5rem 0;
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
 .benefit-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  border: 1px solid #e2e8f0;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.benefit-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border-color: #bfdbfe;
+  background: var(--paper-100);
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
 }
 
 .benefit-icon {
-  font-size: 2.5rem;
-  margin-bottom: 0.75rem;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .benefit-card h4 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0.75rem 0 0.5rem 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-text);
+  margin: 0 0 6px;
 }
 
 .benefit-card p {
-  font-size: 0.9rem;
-  color: #64748b;
-  margin: 0;
+  font-family: var(--font-body);
+  font-size: 12px;
   line-height: 1.5;
+  color: var(--muted-on-paper);
+  margin: 0;
 }
 
-/* Right Side - Mockup */
-.companies-right {
-  position: relative;
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 26px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.15s ease, background 0.2s ease;
 }
 
+.btn--primary {
+  background: var(--stamp-red);
+  color: var(--paper-050);
+}
+
+.btn--primary:hover {
+  background: var(--stamp-red-dark);
+  transform: translateY(-2px);
+}
+
+/* Visual mockup: the open case file */
 .company-mockup {
-  background: white;
-  border-radius: 1.25rem;
-  padding: 2rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  animation: slideInRight 0.8s ease-out;
+  position: relative;
+  background: var(--paper-100);
+  border-radius: 4px;
+  padding: 30px;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.company-mockup::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 28px;
+  width: 110px;
+  height: 20px;
+  background: var(--paper-200);
+  border-radius: 4px 4px 0 0;
+  z-index: -1;
 }
 
 .mockup-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #f1f5f9;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--paper-300);
 }
 
 .mockup-header h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #0f172a;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted-on-paper);
   margin: 0;
 }
 
-.badge {
-  background: #fef3c7;
-  color: #92400e;
-  padding: 0.4rem 0.8rem;
-  border-radius: 50px;
-  font-size: 0.8rem;
-  font-weight: 600;
+.mockup-header .badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--stamp-red);
+  border: 1px solid var(--stamp-red);
+  padding: 3px 10px;
+  border-radius: 20px;
+  transform: rotate(-4deg);
 }
 
-/* Job Cards */
 .job-card {
-  padding: 1.25rem;
-  background: #f8fafc;
-  border-radius: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #e2e8f0;
-  transition: all 0.3s ease;
-}
-
-.job-card:hover {
-  background: #f1f5f9;
-  border-color: #bfdbfe;
+  background: var(--paper-050);
+  border: 1px solid var(--paper-300);
+  border-radius: 3px;
+  padding: 16px;
+  margin-bottom: 14px;
 }
 
 .job-card h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0 0 0.5rem 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-text);
+  margin: 0 0 4px;
 }
 
 .job-card p {
-  font-size: 0.85rem;
-  color: #64748b;
-  margin: 0 0 0.75rem 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted-on-paper);
+  margin: 0 0 12px;
 }
 
 .progress-container {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 10px;
 }
 
 .progress-bar {
   flex: 1;
-  height: 8px;
-  background: #e2e8f0;
-  border-radius: 4px;
+  height: 5px;
+  background: var(--paper-300);
+  border-radius: 2px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #1e40af 0%, #0c63e4 100%);
-  border-radius: 4px;
-  transition: width 0.6s ease;
+  background: var(--verdigris-600);
 }
 
 .progress-text {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #1e40af;
-  min-width: 35px;
-  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-text);
 }
 
-/* Mockup Stats */
 .mockup-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #e2e8f0;
+  display: flex;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--paper-300);
 }
 
-.stat {
+.mockup-stats .stat {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 
-.stat-label {
-  font-size: 0.8rem;
-  color: #64748b;
-  font-weight: 600;
+.mockup-stats .stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.04em;
+  color: var(--muted-on-paper);
 }
 
-.stat-value {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #1e40af;
+.mockup-stats .stat-value {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--ink-text);
 }
-
-/* =============== RESPONSIVE DESIGN =============== */
 
 @media (max-width: 1024px) {
   .companies-content {
-    gap: 3rem;
-  }
-
-  .companies-left h2 {
-    font-size: 2rem;
-  }
-
-  .benefits-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .company-mockup {
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .for-companies {
-    padding: 3rem 1rem;
-  }
-
-  .companies-content {
     grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .companies-left h2 {
-    font-size: 1.75rem;
-  }
-
-  .companies-intro {
-    font-size: 1rem;
-  }
-
-  .benefits-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .benefit-card {
-    padding: 1.25rem;
-  }
-
-  .benefit-icon {
-    font-size: 2rem;
-  }
-
-  .company-mockup {
-    padding: 1.25rem;
-  }
-
-  .mockup-header h3 {
-    font-size: 1.1rem;
-  }
-
-  .job-card {
-    padding: 1rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .job-card h4 {
-    font-size: 0.95rem;
-  }
-
-  .job-card p {
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .for-companies {
-    padding: 2rem 1rem;
-  }
-
-  .companies-left h2 {
-    font-size: 1.5rem;
-  }
-
-  .companies-intro {
-    font-size: 0.95rem;
-    margin: 0 0 1.5rem 0;
-  }
-
-  .benefits-grid {
-    margin: 1.5rem 0;
-  }
-
-  .benefit-card h4 {
-    font-size: 1rem;
-  }
-
-  .benefit-card p {
-    font-size: 0.85rem;
-  }
-
-  .mockup-header {
-    margin-bottom: 1rem;
-  }
-
-  .mockup-stats {
-    gap: 0.75rem;
-    margin-top: 1rem;
-    padding-top: 1rem;
-  }
-
-  .stat-value {
-    font-size: 1.25rem;
+    gap: 40px;
   }
 }
 
 @media (max-width: 480px) {
   .for-companies {
-    padding: 1.5rem 0.75rem;
+    padding: 64px 20px;
   }
 
   .companies-left h2 {
-    font-size: 1.25rem;
+    font-size: 25px;
   }
 
-  .benefit-icon {
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
+  .benefits-grid {
+    grid-template-columns: 1fr;
   }
 
-  .benefit-card p {
-    font-size: 0.8rem;
+  .btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .company-mockup {
-    padding: 1rem;
+    padding: 22px;
   }
 
-  .job-card {
-    padding: 0.75rem;
-  }
-
-  .badge {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.7rem;
+  .mockup-stats {
+    flex-direction: column;
+    gap: 12px;
   }
 }
