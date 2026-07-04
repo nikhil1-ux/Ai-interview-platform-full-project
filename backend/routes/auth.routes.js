@@ -20,8 +20,8 @@ import {
 }
    from "../controllers/startInterview.controller.js"
  
-import { uploadResume as uploadResumeController } from "../controllers/resume.controller.js";
-import { uploadResume } from "../middleware/upload.middleware.js";
+import uploadResumeController  from "../controllers/resume.controller.js";
+import  uploadResume  from "../middleware/upload.middleware.js";
  
 const router = express.Router();
  

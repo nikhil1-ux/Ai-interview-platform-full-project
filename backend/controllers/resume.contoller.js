@@ -45,4 +45,4 @@ const uploadResume = async (req, res) => {
   }
 };
 
-export default { uploadResume };
+export default uploadResume ;
