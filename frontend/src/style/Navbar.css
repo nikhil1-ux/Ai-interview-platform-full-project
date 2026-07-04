@@ -183,8 +183,9 @@
   }
 
   .nav-buttons .nav-button--secondary {
-    display: none;
-  }
+  display: inline-flex;
+  
+}
 }
 
 @media (max-width: 480px) {
