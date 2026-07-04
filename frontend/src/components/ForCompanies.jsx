@@ -9,22 +9,22 @@ const ForCompanies = () => {
     {
       icon: '⚡',
       title: 'Save Time',
-      description: 'Automated screening reduces hiring time by 70%'
+      description: 'Automated, AI-driven interviews reduce screening time by 70%'
     },
     {
       icon: '💰',
       title: 'Cost Effective',
-      description: 'Reduce recruitment costs significantly'
+      description: 'Cut recruitment costs by removing manual first-round screening'
     },
     {
       icon: '📊',
       title: 'Data Driven',
-      description: 'Get detailed analytics on every candidate'
+      description: 'Every candidate is scored on communication, technical skill, and problem solving'
     },
     {
       icon: '🎯',
-      title: 'Quality Hires',
-      description: 'Identify the best candidates accurately'
+      title: 'Ranked Shortlists',
+      description: 'Instantly see candidates ranked by score, ready for the next round'
     }
   ]
 
@@ -36,7 +36,7 @@ const ForCompanies = () => {
           <div className="companies-left">
             <h2>For Companies</h2>
             <p className="companies-intro">
-              Streamline your hiring process with AI-powered interviews. Screen candidates faster, make better hiring decisions, and build your dream team.
+              Set a job description, let AI interview every candidate based on their resume, and get a ranked shortlist in return.
             </p>
 
             <div className="benefits-grid">

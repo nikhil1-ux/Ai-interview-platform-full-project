@@ -15,11 +15,11 @@ const Footer = () => {
             <div className="footer-brand">
               <Link to="/" className="brand-link">
                 <span className="brand-icon">🎯</span>
-                <span className="brand-name">AI Interview Pro</span>
+                <span className="brand-name">HireAI</span>
               </Link>
               <p>
-                Revolutionizing interviews with AI-powered preparation 
-                and evaluation.
+                Smarter hiring with AI-driven interviews and 
+                automated candidate shortlisting.
               </p>
             </div>
 
@@ -48,7 +48,7 @@ const Footer = () => {
               <div className="footer-column">
                 <h4>For Students</h4>
                 <ul>
-                  <li><a href="#for-students">Practice Interviews</a></li>
+                  <li><a href="#for-students">AI Interviews</a></li>
                   <li><a href="/guide">Interview Guide</a></li>
                   <li><a href="/tips">Tips & Tricks</a></li>
                   <li><a href="/community">Community</a></li>
@@ -71,7 +71,7 @@ const Footer = () => {
           <div className="footer-bottom">
             <div className="footer-bottom-content">
               <p className="copyright">
-                © {currentYear} AI Interview Pro. All rights reserved.
+                © {currentYear} HireAI. All rights reserved.
               </p>
               <div className="social-links">
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>

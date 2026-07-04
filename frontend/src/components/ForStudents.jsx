@@ -7,24 +7,24 @@ const ForStudents = () => {
 
   const features = [
     {
-      icon: '🎯',
-      title: 'Real-World Practice',
-      description: 'Practice with actual job descriptions from top companies'
+      icon: '📄',
+      title: 'Resume-Based Questions',
+      description: 'AI tailors every question to your resume and the job description'
     },
     {
       icon: '🤖',
-      title: 'AI Coach',
-      description: 'Get instant feedback on your answers and communication'
+      title: 'AI Interviewer',
+      description: 'Answer questions in a real interview conducted entirely by AI'
     },
     {
-      icon: '📈',
-      title: 'Track Progress',
-      description: 'See how you improve with detailed score analytics'
+      icon: '📊',
+      title: 'Instant Scoring',
+      description: 'Get a detailed breakdown of your communication and technical performance'
     },
     {
       icon: '🏆',
-      title: 'Confidence Builder',
-      description: 'Interview multiple times until you master it'
+      title: 'Stand Out to Recruiters',
+      description: 'Strong scores put you at the top of the recruiter\'s shortlist'
     }
   ]
 
@@ -36,8 +36,8 @@ const ForStudents = () => {
           <div className="students-left">
             <div className="student-mockup">
               <div className="mockup-top">
-                <h3>Interview Preparation</h3>
-                <span className="session-badge">Session 3/5</span>
+                <h3>AI Interview</h3>
+                <span className="session-badge">Question 1 of 5</span>
               </div>
 
               <div className="interview-card">
@@ -77,7 +77,7 @@ const ForStudents = () => {
           <div className="students-right">
             <h2>For Students</h2>
             <p className="students-intro">
-              Land your dream job with confidence. Practice with AI, get real feedback, and master technical interviews.
+              Upload your resume, take an AI-driven interview tailored to the job, and let your results speak for themselves.
             </p>
 
             <div className="features-list">
@@ -96,7 +96,7 @@ const ForStudents = () => {
               className="btn btn--primary"
               onClick={() => navigate('/signup?role=student')}
             >
-              Start Practicing →
+              Get Started →
             </button>
           </div>
         </div>

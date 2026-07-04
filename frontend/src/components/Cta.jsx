@@ -10,10 +10,10 @@ const CTA = () => {
       <div className="cta-container">
         <div className="cta-content">
           <span className="cta-badge">Ready to Get Started?</span>
-          <h2>Join Thousands of Successful Interviews</h2>
+          <h2>Smarter Interviews, Better Hires</h2>
           <p>
-            Whether you're a student looking to ace your interviews or a company 
-            seeking top talent, AI Interview Pro is your ultimate solution.
+            Whether you're a candidate looking to stand out or a company 
+            looking to shortlist faster, our AI-powered platform has you covered.
           </p>
 
           <div className="cta-buttons">
@@ -21,7 +21,7 @@ const CTA = () => {
               className="btn btn--primary btn--large"
               onClick={() => navigate('/signup?role=student')}
             >
-              Start Free as Student
+              Start Free as Candidate
             </button>
             <button 
               className="btn btn--secondary btn--large"

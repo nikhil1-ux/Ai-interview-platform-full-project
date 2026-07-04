@@ -18,19 +18,19 @@ const Hero = () => {
         <div className="hero-content">
           <div className="hero-badge">
             <span className="badge-dot"></span>
-            <span>AI-Powered Interview Preparation</span>
+            <span>AI-Powered Recruitment & Shortlisting</span>
           </div>
 
           <h1 className="hero-title">
-            Master Your Interviews with <span className="highlight">AI Feedback</span>
+            Shortlist the Right Candidates with <span className="highlight">AI Interviews</span>
           </h1>
 
           <p className="hero-description">
-            <strong>For Companies:</strong> Create job descriptions and conduct AI-powered interviews. Get detailed candidate assessments instantly.
+            <strong>For Companies:</strong> Set a job description and let AI generate role-specific interview questions. Get every candidate scored and ranked automatically.
           </p>
 
           <p className="hero-description">
-            <strong>For Students:</strong> Practice with real-world scenarios, receive AI feedback, and interview with confidence.
+            <strong>For Students:</strong> Upload your resume, take an AI-driven interview tailored to the role, and get instant, honest feedback.
           </p>
 
           <div className="hero-stats">
@@ -73,8 +73,8 @@ const Hero = () => {
           {/* Interview Score Card */}
           <div className={`score-card ${animateScore ? 'animate' : ''}`}>
             <div className="score-header">
-              <h3>Your Interview Score</h3>
-              <span className="score-badge">Excellent</span>
+              <h3>Candidate Score</h3>
+              <span className="score-badge">Strong Fit</span>
             </div>
 
             <div className="score-display">
@@ -111,17 +111,17 @@ const Hero = () => {
             </div>
 
             <p className="score-feedback">
-              "Excellent communication and strong technical knowledge. Great job explaining your problem-solving approach!"
+              "Strong technical fundamentals and clear communication. Well-suited for the role's core requirements."
             </p>
 
-            <button className="score-action">View Full Feedback</button>
+            <button className="score-action">View Full Report</button>
           </div>
 
           {/* Floating Interview Badge */}
           <div className="floating-badge interview-badge">
             <span className="badge-icon">📋</span>
             <div>
-              <p>Live Interview</p>
+              <p>AI Interview</p>
               <small>In Progress</small>
             </div>
           </div>
@@ -131,7 +131,7 @@ const Hero = () => {
             <span className="badge-icon">✅</span>
             <div>
               <p>5 Candidates</p>
-              <small>Evaluated Today</small>
+              <small>Shortlisted Today</small>
             </div>
           </div>
         </div>

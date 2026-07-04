@@ -21,7 +21,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/" className="navbar-brand">
           <span className="brand-icon">🎯</span>
-          <span className="brand-text">AI Interview Pro</span>
+          <span className="brand-text">HireAI</span>
         </Link>
 
         {/* Desktop Navigation */}

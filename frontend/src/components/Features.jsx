@@ -6,12 +6,12 @@ const Features = () => {
     {
       icon: '🧠',
       title: 'AI-Powered Questions',
-      description: 'Intelligent system generates contextual questions based on job descriptions'
+      description: 'Questions are generated dynamically from the job description and each candidate\'s resume'
     },
     {
-      icon: '📹',
-      title: 'Video Recording',
-      description: 'Record your responses and review them to improve your performance'
+      icon: '📄',
+      title: 'Resume Parsing',
+      description: 'Upload a resume and let AI extract the skills and experience that shape your interview'
     },
     {
       icon: '⭐',
@@ -21,17 +21,17 @@ const Features = () => {
     {
       icon: '📊',
       title: 'Analytics Dashboard',
-      description: 'Track your progress with detailed insights and improvement areas'
+      description: 'Recruiters get detailed insights and breakdowns for every candidate'
     },
     {
       icon: '🤝',
-      title: 'Company Integration',
-      description: 'Companies can seamlessly review candidate responses and scores'
+      title: 'Recruiter Dashboard',
+      description: 'Companies can review every candidate\'s responses, scores, and full report in one place'
     },
     {
-      icon: '🔄',
-      title: 'Practice Unlimited',
-      description: 'Take interviews multiple times until you master each job role'
+      icon: '📈',
+      title: 'Ranked Shortlisting',
+      description: 'Candidates are automatically sorted by score so recruiters see top talent first'
     }
   ]
 

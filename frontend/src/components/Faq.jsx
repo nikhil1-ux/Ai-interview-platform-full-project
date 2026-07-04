@@ -7,27 +7,27 @@ const Faq = () => {
   const faqs = [
     {
       question: 'How does the AI interview process work?',
-      answer: 'Students select a job description, and our AI generates interview questions based on the role. They answer on camera, and our system provides instant feedback on communication, technical knowledge, and problem-solving skills.'
+      answer: 'Candidates upload their resume and select a job description. Our AI generates interview questions based on the role and the candidate\'s resume, then evaluates each answer to provide a detailed score on communication, technical knowledge, and problem-solving skills.'
     },
     {
       question: 'Can companies customize interview questions?',
-      answer: 'Yes! Companies can create custom job descriptions, and our AI will generate relevant questions. They can also review and adjust questions before candidates interview.'
+      answer: 'Yes! Companies create a job description, and our AI generates relevant questions from it. Questions are also shaped by each candidate\'s resume, so every interview is tailored.'
     },
     {
-      question: 'How is student performance scored?',
+      question: 'How is candidate performance scored?',
       answer: 'Responses are evaluated on multiple factors: clarity of communication, technical accuracy, relevant examples, response structure, and problem-solving approach. Each aspect gets a detailed score.'
     },
     {
-      question: 'Can I retake interviews to improve my score?',
-      answer: 'Absolutely! Students can practice unlimited times for each job role. We recommend waiting 24 hours between attempts to allow for better preparation.'
+      question: 'How are candidates shortlisted?',
+      answer: 'Once candidates complete their AI interview, their scores are automatically ranked. Recruiters see a sorted shortlist, making it easy to identify top candidates at a glance.'
     },
     {
       question: 'How do companies access candidate information?',
-      answer: 'Companies get a complete dashboard showing all candidates who interviewed for their positions. They can view scores, watch video responses, and read AI-generated summaries.'
+      answer: 'Companies get a complete dashboard showing all candidates who interviewed for their positions, including their scores, interview transcripts, and AI-generated summaries.'
     },
     {
       question: 'Is there a free trial?',
-      answer: 'Yes! Students get free access to 3 practice interviews. Companies get a 14-day free trial with access to all features.'
+      answer: 'Yes! Companies get a 14-day free trial with access to all features.'
     }
   ]
 
@@ -40,7 +40,7 @@ const Faq = () => {
       <div className="container">
         <div className="section-header">
           <h2>Frequently Asked Questions</h2>
-          <p>Everything you need to know about AI Interview Pro</p>
+          <p>Everything you need to know about our AI interview platform</p>
         </div>
 
         <div className="faq-container">

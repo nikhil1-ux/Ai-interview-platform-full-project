@@ -12,19 +12,19 @@ const HowItWorks = () => {
     {
       number: '2',
       title: 'AI Generates Questions',
-      description: 'Our AI automatically creates relevant interview questions',
+      description: 'Our AI creates interview questions tailored to the job description and each candidate\'s resume',
       icon: '🤖'
     },
     {
       number: '3',
-      title: 'Receive Candidates',
-      description: 'Students practice and take interviews automatically',
+      title: 'Candidates Get Interviewed',
+      description: 'Candidates upload their resume and take the AI-driven interview automatically',
       icon: '👥'
     },
     {
       number: '4',
-      title: 'Get Detailed Reports',
-      description: 'Instant feedback, scores, and candidate assessments',
+      title: 'Get Ranked Shortlists',
+      description: 'Instantly see scored, ranked candidates ready for the next round',
       icon: '📊'
     }
   ]
@@ -33,26 +33,26 @@ const HowItWorks = () => {
     {
       number: '1',
       title: 'Choose a Job',
-      description: 'Browse job descriptions matching your skills and interests',
+      description: 'Browse open roles that match your skills and interests',
       icon: '🔍'
     },
     {
       number: '2',
-      title: 'Practice Interview',
-      description: 'Answer AI-generated questions in a realistic interview setting',
-      icon: '🎤'
+      title: 'Upload Your Resume',
+      description: 'Your resume shapes the interview questions you\'ll be asked',
+      icon: '📄'
     },
     {
       number: '3',
-      title: 'Get AI Feedback',
-      description: 'Receive detailed feedback on communication and technical skills',
-      icon: '💡'
+      title: 'Take the AI Interview',
+      description: 'Answer questions generated specifically for the role and your background',
+      icon: '🎤'
     },
     {
       number: '4',
-      title: 'Improve & Retry',
-      description: 'Learn from feedback and retake interviews to improve scores',
-      icon: '📈'
+      title: 'Get Your Results',
+      description: 'Receive a detailed score and feedback on your performance',
+      icon: '💡'
     }
   ]
 
