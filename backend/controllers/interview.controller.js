@@ -41,7 +41,7 @@ await sendEmail({
 
     <p>Your interview has been scheduled.</p>
 
-    <p>Role: ${interview.role}</p>
+    <p>Role: ${interview.jobRole}</p>
 
     <p>Duration: ${interview.duration} mins</p>
   `,

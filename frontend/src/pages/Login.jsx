@@ -21,23 +21,21 @@ const onSubmit = async (data) => {
     const response = await api.post("/auth/login", {
       email: data.email,
       password: data.password,
-      role: data.role,
     });
-    
 
-    localStorage.setItem(
-      "accessToken",
-      response.data.data.accessToken
-    );
- 
-    console.log(
-  "Stored:",
-  localStorage.getItem("accessToken")
-   );
+    const { accessToken, user } = response.data.data;
 
-    localStorage.setItem("role", data.role);
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("role", user.role);
 
-    if (data.role === "student") {
+    // Warn if the role picked at login doesn't match the account's actual role
+    if (data.role && data.role !== user.role) {
+      console.warn(
+        `Selected role "${data.role}" does not match account role "${user.role}". Using the account's actual role.`
+      );
+    }
+
+    if (user.role === "student") {
       navigate("/candidate-dashboard");
     } else {
       navigate("/recruiter-dashboard");

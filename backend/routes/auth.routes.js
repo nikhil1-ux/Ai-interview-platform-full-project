@@ -21,7 +21,7 @@ import {
    from "../controllers/startInterview.controller.js"
  
 import uploadResumeController  from "../controllers/resume.controller.js";
-import  uploadResume  from "../middleware/upload.middleware.js";
+import  uploadResume  from "../middleware/multer.middleware.js";
  
 const router = express.Router();
  

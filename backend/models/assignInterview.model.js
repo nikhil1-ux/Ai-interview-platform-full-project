@@ -14,11 +14,12 @@ const assignmentSchema = new mongoose.Schema(
       required: true,
     },
 
-    status: {
-      type: String,
-      enum: ["assigned", "accepted", "rejected"],
-      default: "assigned",
-    },
+    // assignInterview.model.js
+status: {
+  type: String,
+  enum: ["assigned", "accepted", "rejected", "in-progress", "completed"],
+  default: "assigned",
+},
 
     assignedAt: {
       type: Date,

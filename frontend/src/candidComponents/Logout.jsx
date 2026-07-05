@@ -5,10 +5,16 @@ const Logout = () => {
 
 const navigate = useNavigate();
 
-const handleLogout = () => {
-  localStorage.removeItem("token");
-  navigate("/login");
-  };
+const handleLogout = async () => {
+  try {
+    await api.post("/auth/logout");
+  } catch (err) {
+    console.error("Logout request failed:", err);
+  } finally {
+    localStorage.removeItem("accessToken");
+    navigate("/login");
+  }
+};
 
   return (
        <div className="page">

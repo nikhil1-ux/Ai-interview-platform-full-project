@@ -85,11 +85,11 @@ export const login = asyncHandler(async (req, res) => {
 
 
 
+// auth.controller.js — logout now actually invalidates it in the DB
 export const logout = asyncHandler(async (req, res) => {
+  await User.findByIdAndUpdate(req.user._id, { refreshToken: null });
   res.clearCookie("refreshToken");
-  return res.status(200).json(
-    new ApiResponse(200, {}, "Logged out successfully")
-  );
+  return res.status(200).json(new ApiResponse(200, {}, "Logged out successfully"));
 });
 
 export const refreshAccessToken = asyncHandler(async (req, res) => {

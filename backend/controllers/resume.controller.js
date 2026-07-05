@@ -1,6 +1,6 @@
-import { uploadToCloudinary } from "../services/cloudinary.service.js";
-import { extractResumeText } from "../services/resume.service.js";
-import User from "../models/user.model.js";
+import uploadToCloudinary  from "../service/cloudinary.service.js";
+import { extractResumeText } from "../service/resume.service.js";
+import {User} from "../models/user.model.js";
 
 const uploadResume = async (req, res) => {
   try {

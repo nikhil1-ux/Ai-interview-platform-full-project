@@ -153,10 +153,11 @@ Generate
 2. Technical Score
 3. Communication Score
 4. Confidence Score
-5. Hiring Recommendation
-6. Strengths
-7. Weaknesses
-8. Areas of Improvement
+5. Problem Solving Score
+6. Hiring Recommendation
+7. Strengths
+8. Weaknesses
+9 . Areas of Improvement
 
 Return ONLY JSON.
 
@@ -165,6 +166,7 @@ Return ONLY JSON.
     "technical":88,
     "communication":85,
     "confidence":91,
+     "problemSolving":87,
     "recommendation":"Hire",
     "strengths":[
         "Point 1",

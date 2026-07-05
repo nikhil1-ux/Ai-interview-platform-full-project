@@ -1,27 +1,28 @@
-import fs from "fs";
-import pdfParse from "pdf-parse";
+
+import pdfParse from "pdf-parse/lib/pdf-parse.js";
 import mammoth from "mammoth";
  
 /**
  * Extracts raw text from an uploaded resume file (PDF or DOCX).
  *
- * @param {string} filePath - Absolute/relative path to the file on disk.
+ * @param {Buffer} filebuffer - The buffer containing the file data.
  * @param {string} mimetype - The file's mimetype (from multer).
  * @returns {Promise<string>} The extracted, cleaned resume text.
  */
-export const extractResumeText = async (filePath, mimetype) => {
+export const extractResumeText = async (filebuffer, mimetype) => {
   try {
     let rawText = "";
  
     if (mimetype === "application/pdf") {
-      const buffer = fs.readFileSync(filePath);
-      const data = await pdfParse(buffer);
+      const data = await pdfParse(filebuffer);
       rawText = data.text;
     } else if (
       mimetype ===
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     ) {
-      const result = await mammoth.extractRawText({ path: filePath });
+      const result = await mammoth.extractRawText({ buffer: 
+        filebuffer
+      });
       rawText = result.value;
     } else {
       throw new Error("Unsupported file type for resume parsing");

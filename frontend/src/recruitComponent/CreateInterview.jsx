@@ -139,7 +139,7 @@ const onSubmit = async (data) => {
               required: "Email is required",
             })}
           />
-          <p>{errors.candidateEmail?.message}</p>
+          <p>{errors.email?.message}</p>
         </div>
 
         <button type="submit">
