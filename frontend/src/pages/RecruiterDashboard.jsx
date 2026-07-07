@@ -9,11 +9,11 @@ const RecruiterDashboard = () => {
         <h2>Recruiter</h2>
 
         <ul>
-          <li>Dashboard</li>
-          <li><NavLink to ="create-interview">Create Interview</NavLink></li>
-          <li>Manage Interviews</li>
-          <li>Candidates</li>
-          <li>Results</li>
+          <li><NavLink to="" end>Dashboard</NavLink></li>
+          <li><NavLink to="create-interview">Create Interview</NavLink></li>
+          <li><NavLink to="manage-interviews">Manage Interviews</NavLink></li>
+          <li><NavLink to="candidates">Candidates</NavLink></li>
+          <li><NavLink to="results">Results</NavLink></li>
         </ul>
       </aside>
 

@@ -6,7 +6,16 @@ import {
   logout,
   refreshAccessToken,
   getCurrentUser,
+  updateProfile,
 } from "../controllers/auth.controller.js";
+
+import {
+  getMyResults,
+  getRanking,
+  getRecruiterStats,
+  getRecruiterInterviews,
+  getRecruiterResults,
+} from "../controllers/dashboard.controller.js";
  
 import { verifyJWT } from "../middleware/auth.middleware.js";
  
@@ -45,5 +54,13 @@ router.post(
 // Protected user routes
 router.post("/logout", verifyJWT, logout);
 router.get("/me", verifyJWT, getCurrentUser);
- 
+router.patch("/update-profile", verifyJWT, updateProfile);
+
+// Dashboard routes
+router.get("/my-results", verifyJWT, getMyResults);
+router.get("/ranking", verifyJWT, getRanking);
+router.get("/recruiter/stats", verifyJWT, getRecruiterStats);
+router.get("/recruiter/interviews", verifyJWT, getRecruiterInterviews);
+router.get("/recruiter/results", verifyJWT, getRecruiterResults);
+
 export default router;

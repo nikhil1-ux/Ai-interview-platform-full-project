@@ -17,6 +17,9 @@ import Ranking from "../candidComponents/Ranking";
 import Resume from "../candidComponents/Resume";
 import CreateInterview from "../recruitComponent/CreateInterview";
 import RecruiterHome from "../recruitComponent/RecuiterHome";
+import ManageInterviews from "../recruitComponent/ManageInterviews";
+import Candidates from "../recruitComponent/Candidates";
+import Results from "../recruitComponent/Results";
 import CandidateHome from "../candidComponents/CandidateHome";
 import { Outlet } from "react-router-dom";
 import InterviewRoom from "../candidComponents/InterviewRoom";
@@ -96,7 +99,19 @@ const router = createBrowserRouter([
           {
             path:"create-interview",
             element:<CreateInterview/>
-          }
+          },
+          {
+            path: "manage-interviews",
+            element: <ManageInterviews />,
+          },
+          {
+            path: "candidates",
+            element: <Candidates />,
+          },
+          {
+            path: "results",
+            element: <Results />,
+          },
 
         ]
 

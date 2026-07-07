@@ -15,7 +15,10 @@ export const createAndAssignInterviews = asyncHandler(async(req,res)=>{
   const {title, email} = req.body;
 
   // Step 1: Create Interview
-  const interview = await Interview.create(req.body);
+  const interview = await Interview.create({
+    ...req.body,
+    createdBy: req.user._id,
+  });
   console.log("Interview created:", interview._id);
 
   // Step 2: Find Candidate
