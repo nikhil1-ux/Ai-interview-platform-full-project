@@ -1,0 +1,164 @@
+/* CandidateHome page — styles for the homepage only.
+   Built on the Case File tokens in App.css (shared with the dashboard shell). */
+
+.dashboard-home {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ---------- WELCOME HEADER ---------- */
+.welcome-section h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--ink-text);
+}
+
+.welcome-section p {
+  color: var(--muted-on-paper);
+  margin-top: var(--space-1);
+}
+
+.dashboard-error {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--stamp-red);
+  margin-top: var(--space-3);
+}
+
+.btn-secondary {
+  margin-top: var(--space-3);
+  background: transparent;
+  color: var(--stamp-red);
+  border: 1px solid var(--stamp-red);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  transition: background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+}
+
+.btn-secondary:hover {
+  background: var(--stamp-red);
+  color: var(--paper-050);
+}
+
+/* ---------- STATS CARDS ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+.stats .card {
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: transform var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
+}
+
+.stats .card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md, 0 10px 20px rgba(0, 0, 0, 0.1));
+}
+
+.stats .card h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--ink-text);
+}
+
+.stats .card p {
+  color: var(--muted-on-paper);
+  margin-top: var(--space-1);
+}
+
+/* ---------- QUICK ACTIONS ---------- */
+.actions {
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+}
+
+.actions h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--ink-text);
+  margin-bottom: var(--space-4);
+}
+
+.action-buttons {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.action-buttons button {
+  background: var(--stamp-red);
+  color: var(--paper-050);
+  border: none;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  transition: background var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
+}
+
+.action-buttons button:hover {
+  background: var(--stamp-red-dark);
+  transform: translateY(-1px);
+}
+
+/* ---------- AI INSIGHTS ---------- */
+.insights {
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+}
+
+.insights h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--ink-text);
+  margin-bottom: var(--space-4);
+}
+
+.insights ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.insights li {
+  background: var(--paper-100);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--ink-text);
+  font-size: var(--text-sm);
+  transition: background var(--duration-fast) var(--ease);
+}
+
+.insights li:hover {
+  background: var(--paper-050);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1024px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}

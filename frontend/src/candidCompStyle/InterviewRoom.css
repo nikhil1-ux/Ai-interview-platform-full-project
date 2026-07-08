@@ -1,0 +1,201 @@
+/* Interview Room — live AI interview session page.
+   Built on the Case File tokens in App.css, consistent with the
+   Candidate Dashboard / Assigned Interview styling. */
+
+.interview-room {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.interview-room h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--ink-text);
+}
+
+.interview-room > p {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--stamp-red);
+}
+
+/* ---------- SESSION INFO ---------- */
+.session-box {
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.session-box p {
+  margin: 0;
+  color: var(--muted-on-paper);
+  font-size: var(--text-sm);
+}
+
+.session-box b {
+  color: var(--ink-text);
+  font-weight: 600;
+  margin-right: var(--space-1);
+}
+
+/* ---------- CHAT / QUESTION AREA ---------- */
+.chat-box {
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.chat-box > p {
+  color: var(--muted-on-paper);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.question-meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted-on-paper);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.question-text {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--ink-text);
+  line-height: 1.5;
+}
+
+/* ---------- FEEDBACK ---------- */
+.feedback-box {
+  background: rgba(63, 107, 94, 0.1);
+  border: 1px solid rgba(63, 107, 94, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.feedback-box p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--ink-text);
+}
+
+.feedback-box b {
+  color: var(--verdigris-600);
+}
+
+/* ---------- ANSWER INPUT ---------- */
+textarea {
+  width: 100%;
+  resize: vertical;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--ink-text);
+  background: var(--paper-050);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  transition: border-color var(--duration-fast) var(--ease);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--stamp-red);
+}
+
+textarea:disabled {
+  background: var(--paper-100);
+  color: var(--muted-on-paper);
+  cursor: not-allowed;
+}
+
+.chat-box button {
+  align-self: flex-start;
+  background: var(--stamp-red);
+  color: var(--paper-050);
+  border: none;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  transition: background var(--duration-fast) var(--ease), opacity var(--duration-fast) var(--ease);
+}
+
+.chat-box button:hover:not(:disabled) {
+  background: var(--stamp-red-dark);
+}
+
+.chat-box button:disabled {
+  background: var(--muted-on-paper);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* ---------- FINAL REPORT ---------- */
+.report-box {
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.report-box p {
+  margin: 0;
+  color: var(--muted-on-paper);
+  font-size: var(--text-sm);
+}
+
+.report-box b {
+  color: var(--ink-text);
+  font-weight: 600;
+  margin-right: var(--space-1);
+}
+
+.report-box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: var(--space-2) 0 0;
+  padding: 0;
+}
+
+.report-box li {
+  background: var(--paper-100);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--ink-text);
+  font-size: var(--text-sm);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 640px) {
+  .interview-room {
+    padding: var(--space-4);
+  }
+
+  .chat-box button {
+    align-self: stretch;
+  }
+}

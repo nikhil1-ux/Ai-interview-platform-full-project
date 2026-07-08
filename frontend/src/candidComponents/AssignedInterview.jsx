@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios.js";
+import "../candidCompStyle/AssignedInterview.css";
  
 const AssignedInterview = () => {
   const [assignments, setAssignments] = useState([]);

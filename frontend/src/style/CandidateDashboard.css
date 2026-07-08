@@ -111,11 +111,12 @@
   border-radius: var(--radius-md);
   font-weight: 600;
   font-size: var(--text-sm);
-  transition: background var(--duration-fast) var(--ease);
+  transition: background var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
 }
 
 .primaryBtn:hover {
   background: var(--stamp-red-dark);
+  transform: translateY(-1px);
 }
 
 /* ---------- GENERIC CARD (CandidateHome stats, Performance, Resume, Logout) ---------- */
@@ -125,6 +126,12 @@
   padding: var(--space-5);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md, 0 10px 20px rgba(0, 0, 0, 0.1));
 }
 
 .card h2 {
@@ -154,6 +161,7 @@
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
   font-weight: 600;
+  transition: background var(--duration-fast) var(--ease);
 }
 
 .card button:hover {
@@ -222,6 +230,11 @@
   margin-bottom: var(--space-2);
   border-radius: var(--radius-md);
   color: var(--ink-text);
+  transition: background var(--duration-fast) var(--ease);
+}
+
+.panel li:hover {
+  background: var(--paper-050);
 }
 
 /* ---------- RESUME ---------- */
@@ -232,6 +245,11 @@
   padding: var(--space-2) var(--space-3);
   border: none;
   border-radius: var(--radius-md);
+  transition: background var(--duration-fast) var(--ease);
+}
+
+.resumeBox button:hover {
+  background: var(--stamp-red-dark);
 }
 
 .success {
@@ -275,6 +293,7 @@
   border-radius: var(--radius-md);
   font-weight: 600;
   font-size: var(--text-sm);
+  transition: background var(--duration-fast) var(--ease);
 }
 
 .page button:hover {
@@ -344,10 +363,12 @@
   border-radius: var(--radius-md);
   font-weight: 600;
   font-size: var(--text-sm);
+  transition: background var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
 }
 
 .action-buttons button:hover {
   background: var(--stamp-red-dark);
+  transform: translateY(-1px);
 }
 
 .insights ul {
@@ -363,6 +384,11 @@
   border-radius: var(--radius-md);
   color: var(--ink-text);
   font-size: var(--text-sm);
+  transition: background var(--duration-fast) var(--ease);
+}
+
+.insights li:hover {
+  background: var(--paper-050);
 }
 
 /* ---------- MOBILE TOPBAR ---------- */

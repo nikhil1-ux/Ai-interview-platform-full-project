@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { connectSocket, getSocket, disconnectSocket } from "../socket/socket";
+import "../candidCompStyle/InterviewRoom.css";
 
 const InterviewRoom = () => {
   const { sessionId } = useParams();
