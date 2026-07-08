@@ -399,13 +399,29 @@
   padding: var(--space-3) var(--space-4);
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: calc(var(--z-sidebar) + 1);
+}
+
+.mobileTopbar .logo {
+  margin-bottom: 0;
+  font-size: var(--text-base);
 }
 
 .menuBtn {
-  font-size: var(--text-xl);
+  font-size: var(--text-2xl);
+  line-height: 1;
   background: none;
   border: none;
   color: var(--paper-050);
+  padding: var(--space-2);
+  cursor: pointer;
+}
+
+/* ---------- SIDEBAR OVERLAY (mobile drawer backdrop) ---------- */
+.sidebarOverlay {
+  display: none;
 }
 
 /* ---------- RESPONSIVE ---------- */
@@ -431,14 +447,33 @@
 
   .sidebar {
     position: fixed;
-    left: -260px;
+    left: -280px;
     top: 0;
+    width: 260px;
+    max-width: 80vw;
     height: 100%;
     z-index: var(--z-sidebar);
+    box-shadow: var(--shadow-md, 0 10px 30px rgba(0, 0, 0, 0.3));
+    transition: left 0.28s ease;
+    overflow-y: auto;
   }
 
   .sidebar.open {
     left: 0;
+  }
+
+  /* hide the sidebar's own logo on mobile since the topbar already shows it */
+  .sidebar .logo {
+    display: none;
+  }
+
+  .sidebarOverlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: calc(var(--z-sidebar) - 1);
+    animation: fadeIn 0.2s ease;
   }
 
   .gridCards,
@@ -455,4 +490,32 @@
     align-items: flex-start;
     gap: var(--space-2);
   }
+}
+
+@media (max-width: 480px) {
+  .mobileTopbar {
+    padding: var(--space-3);
+  }
+
+  .main {
+    padding: var(--space-3);
+  }
+
+  .card,
+  .panel {
+    padding: var(--space-4);
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

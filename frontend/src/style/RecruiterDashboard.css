@@ -438,6 +438,41 @@ tr.empty-row td,
   margin: var(--space-3) 0;
 }
 
+/* ---------- MOBILE TOPBAR (hamburger trigger) ---------- */
+.mobileTopbar {
+  display: none;
+  background: var(--surface-app-sidebar);
+  color: var(--paper-050);
+  padding: var(--space-3) var(--space-4);
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: calc(var(--z-sidebar) + 1);
+}
+
+.mobileTopbar h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  margin: 0;
+  color: var(--paper-050);
+}
+
+.menuBtn {
+  font-size: var(--text-2xl);
+  line-height: 1;
+  background: none;
+  border: none;
+  color: var(--paper-050);
+  padding: var(--space-2);
+  cursor: pointer;
+}
+
+/* ---------- SIDEBAR OVERLAY (mobile drawer backdrop) ---------- */
+.sidebarOverlay {
+  display: none;
+}
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 900px) {
   .stats {
@@ -452,17 +487,53 @@ tr.empty-row td,
   .dashboard {
     flex-direction: column;
   }
-  .sidebar {
-    width: 100%;
+
+  .mobileTopbar {
+    display: flex;
   }
+
+  .sidebar {
+    position: fixed;
+    left: -280px;
+    top: 0;
+    width: 250px;
+    max-width: 80vw;
+    height: 100%;
+    z-index: var(--z-sidebar);
+    box-shadow: var(--shadow-md, 0 10px 30px rgba(0, 0, 0, 0.3));
+    transition: left 0.28s ease;
+    overflow-y: auto;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  /* hide the sidebar's own heading on mobile since the topbar already shows it */
+  .sidebar h2 {
+    display: none;
+  }
+
   .sidebar ul {
     display: flex;
-    overflow-x: auto;
+    flex-direction: column;
+    overflow-x: visible;
     gap: var(--space-2);
   }
+
   .sidebar li {
-    white-space: nowrap;
+    white-space: normal;
   }
+
+  .sidebarOverlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: calc(var(--z-sidebar) - 1);
+    animation: fadeIn 0.2s ease;
+  }
+
   .content {
     padding: var(--space-4);
   }
@@ -479,4 +550,40 @@ tr.empty-row td,
     flex-direction: column;
     align-items: stretch;
   }
+}
+
+@media (max-width: 480px) {
+  .mobileTopbar {
+    padding: var(--space-3);
+  }
+
+  .content {
+    padding: var(--space-3);
+  }
+
+  .card,
+  .stat-card {
+    padding: var(--space-4);
+  }
+
+  table,
+  .table-section-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .candidates-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .candidates-toolbar input {
+    min-width: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
