@@ -33,9 +33,9 @@ const onSubmit = async (data) => {
 
     setTimeout(() => {
       if (response.data.data.role === "student") {
-        navigate("/candidate");
+        navigate("/candidate-dashboard");
       } else {
-        navigate("/recruiter");
+        navigate("/recruiter-dashboard");
       }
     }, 1000);
 

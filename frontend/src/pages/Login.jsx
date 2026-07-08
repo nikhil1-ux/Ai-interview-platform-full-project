@@ -3,6 +3,7 @@ import "../style/Auth.css"
 import "../style/Login.css"
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
+import toast from "react-hot-toast";
 
 import { useForm } from "react-hook-form";
 
@@ -19,10 +20,14 @@ const navigate = useNavigate();
 const onSubmit = async (data) => {
  
  try {
+
+
     const response = await api.post("/auth/login", {
-      email: data.email,
-      password: data.password,
-    });
+     email: data.email,
+    password: data.password,
+       });
+
+    toast.success("Login successful!");
 
     const { accessToken, user } = response.data.data;
 
@@ -42,8 +47,10 @@ const onSubmit = async (data) => {
       navigate("/recruiter-dashboard");
     }
   } catch (error) {
-    console.log("Error:", error);
-    console.log("Response:", error.response?.data);
+    
+     toast.error(
+    error.response?.data?.message || "Login failed. Please try again."
+  );
   }
 };
 
