@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import api from "../api/axios";
+import "../recruitCompStyle/Candidates.css";
 
 const STATUS_FILTERS = ["all", "assigned", "accepted", "in-progress", "completed", "rejected"];
 

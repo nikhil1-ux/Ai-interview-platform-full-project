@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
+import "../recruitCompStyle/RecruiterHome.css";
 
 const RecruiterHome = () => {
   const navigate = useNavigate();

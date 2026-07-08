@@ -1,0 +1,227 @@
+/* ==========================================
+   Recruiter Home Dashboard
+========================================== */
+
+.recruiter-home{
+    animation:fadeIn .35s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ---------- Heading ---------- */
+
+.recruiter-home h1{
+    font-size:2rem;
+    font-weight:700;
+    margin-bottom:8px;
+    color:#111827;
+}
+
+.recruiter-home>p{
+    color:#6b7280;
+    margin-bottom:30px;
+}
+
+/* ---------- Stats ---------- */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:24px;
+    margin-bottom:35px;
+}
+
+.stat-card{
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    border:1px solid #e5e7eb;
+    transition:.3s;
+    position:relative;
+    overflow:hidden;
+}
+
+.stat-card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:5px;
+    background:#2563eb;
+}
+
+.stat-card:nth-child(2)::before{
+    background:#f59e0b;
+}
+
+.stat-card:nth-child(3)::before{
+    background:#22c55e;
+}
+
+.stat-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.stat-card h3{
+    font-size:15px;
+    color:#6b7280;
+    margin-bottom:15px;
+}
+
+.stat-card p{
+    font-size:42px;
+    font-weight:700;
+    color:#111827;
+}
+
+/* ---------- Quick Actions ---------- */
+
+.quick-actions{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:35px;
+}
+
+.quick-actions h2{
+    font-size:20px;
+    margin-bottom:18px;
+}
+
+.quick-actions button{
+    margin-right:15px;
+    margin-top:10px;
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.25s;
+    font-weight:600;
+}
+
+.quick-actions button:first-of-type{
+    background:#2563eb;
+    color:white;
+}
+
+.quick-actions button:nth-of-type(2){
+    background:#10b981;
+    color:white;
+}
+
+.quick-actions button:last-of-type{
+    background:#f3f4f6;
+}
+
+.quick-actions button:hover{
+    transform:translateY(-2px);
+}
+
+/* ---------- Table ---------- */
+
+.table-section{
+    background:#fff;
+    border-radius:18px;
+    border:1px solid #e5e7eb;
+    padding:25px;
+}
+
+.table-section h2{
+    margin-bottom:20px;
+}
+
+.table-section table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.table-section th{
+    background:#f8fafc;
+    color:#6b7280;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+}
+
+.table-section th,
+.table-section td{
+    padding:15px;
+}
+
+.table-section tbody tr{
+    transition:.25s;
+}
+
+.table-section tbody tr:hover{
+    background:#f8fafc;
+}
+
+/* ---------- Status ---------- */
+
+.status-tag{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.status-tag.completed{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.status-tag.pending{
+    background:#fef3c7;
+    color:#b45309;
+}
+
+.status-tag.assigned{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.status-tag.cancelled{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+/* ---------- Empty Row ---------- */
+
+.empty-row td{
+    text-align:center;
+    padding:40px;
+    color:#6b7280;
+}
+
+/* ---------- Mobile ---------- */
+
+@media(max-width:768px){
+
+.quick-actions{
+    display:flex;
+    flex-direction:column;
+}
+
+.quick-actions button{
+    width:100%;
+    margin-right:0;
+}
+
+.table-section{
+    overflow-x:auto;
+}
+
+}

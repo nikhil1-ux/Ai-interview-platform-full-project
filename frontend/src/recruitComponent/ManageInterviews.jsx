@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
+import "../recruitCompStyle/ManageInterviews.css";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const ManageInterviews = () => {
   const navigate = useNavigate();
@@ -89,9 +91,13 @@ const ManageInterviews = () => {
                   <span className="meta-pill">{i.total} assigned</span>
                   <span className="meta-pill completed">{i.completed} completed</span>
                   <span className="meta-pill pending">{i.pending} pending</span>
-                  <span className="expand-arrow">
-                    {expandedId === i.interviewId ? "▲" : "▼"}
-                  </span>
+                 <span className="expand-arrow">
+  {expandedId === i.interviewId ? (
+    <ChevronUp size={18} />
+  ) : (
+    <ChevronDown size={18} />
+  )}
+</span>
                 </div>
               </div>
 

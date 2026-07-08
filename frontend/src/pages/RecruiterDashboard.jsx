@@ -14,6 +14,7 @@ const RecruiterDashboard = () => {
           <li><NavLink to="manage-interviews">Manage Interviews</NavLink></li>
           <li><NavLink to="candidates">Candidates</NavLink></li>
           <li><NavLink to="results">Results</NavLink></li>
+          <li><NavLink to="logout">Logout</NavLink></li>
         </ul>
       </aside>
 

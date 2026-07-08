@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import api from "../api/axios";
+import "../recruitCompStyle/Results.css";
 
 const RECOMMENDATION_FILTERS = ["all", "Hire", "Consider", "Reject"];
 

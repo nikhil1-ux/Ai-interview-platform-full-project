@@ -1,0 +1,178 @@
+/* ===========================
+   CREATE INTERVIEW
+=========================== */
+
+.createInterview {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid #e5e7eb;
+}
+
+.createInterview h2 {
+  font-size: 2rem;
+  color: #111827;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* ===========================
+   FORM
+=========================== */
+
+.createInterview form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background: #f9fafb;
+  font-size: 15px;
+  transition: 0.3s ease;
+  outline: none;
+  font-family: inherit;
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+}
+
+/* Placeholder */
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* Error */
+
+.formGroup p {
+  color: #dc2626;
+  font-size: 13px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* ===========================
+   NUMBER INPUT
+=========================== */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  cursor: pointer;
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.createInterview button {
+  margin-top: 10px;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg,#2563eb,#1d4ed8);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.createInterview button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(37,99,235,.28);
+}
+
+.createInterview button:active {
+  transform: scale(.98);
+}
+
+/* ===========================
+   TWO COLUMN LAYOUT
+=========================== */
+
+@media (min-width:768px){
+
+.createInterview form{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:22px;
+}
+
+.formGroup:nth-child(4){
+grid-column:1/-1;
+}
+
+.formGroup:nth-child(9){
+grid-column:1/-1;
+}
+
+.createInterview button{
+grid-column:1/-1;
+}
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.createInterview{
+margin:20px;
+padding:25px;
+}
+
+.createInterview h2{
+font-size:1.6rem;
+}
+
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#cbd5e1;
+border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+background:#94a3b8;
+}
