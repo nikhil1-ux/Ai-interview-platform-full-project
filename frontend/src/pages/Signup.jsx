@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 const Signup = () => {
 
-  const navigate = useNaviagte();
+  const navigate = useNavigate();
   
   const {
     register,
