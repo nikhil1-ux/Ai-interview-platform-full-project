@@ -15,24 +15,6 @@ export default function Home() {
 
      
      <>
-       <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 3000,
-          style: {
-            background: "#1f2937",
-            color: "#fff",
-            borderRadius: "10px",
-            padding: "16px",
-          },
-          success: {
-            iconTheme: {
-              primary: "#22c55e",
-              secondary: "#fff",
-            },
-          },
-        }}
-      />
 
       <Navbar />
       <main>

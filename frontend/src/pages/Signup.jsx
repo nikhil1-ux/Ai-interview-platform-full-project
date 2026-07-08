@@ -5,6 +5,7 @@ import "../style/Signup.css";
 import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
 
@@ -19,30 +20,27 @@ const Signup = () => {
 
   const role = watch("role", "");
   const password = watch("password");
+
 const onSubmit = async (data) => {
   try {
     const response = await api.post("/auth/signup", data);
 
-    console.log(response.data);
+    toast.success("Signup successful!");
 
-    // Save token
+    // Save user/token if needed
     localStorage.setItem("token", response.data.accessToken);
+    localStorage.setItem("user", JSON.stringify(response.data.data));
 
-    // Save user
-    localStorage.setItem(
-      "user",
-      JSON.stringify(response.data.data)
-    );
-
-    // Redirect according to role
-    if (response.data.data.role === "student") {
-      navigate("/candidate");
-    } else if (response.data.data.role === "recruiter") {
-      navigate("/recruiter");
-    }
+    setTimeout(() => {
+      if (response.data.data.role === "student") {
+        navigate("/candidate");
+      } else {
+        navigate("/recruiter");
+      }
+    }, 1000);
 
   } catch (error) {
-    console.log(error.response?.data);
+    toast.error(error.response?.data?.message || "Signup failed!");
   }
 };
 
@@ -237,9 +235,9 @@ const onSubmit = async (data) => {
         Signup
       </button>
 
-      <p className="auth-switch">
-        Already have an account? <a href="/login">Log in</a>
-      </p>
+    <p className="auth-switch">
+  Already have an account? <Link to="/login">Log in</Link>
+    </p>
     </form>
     </div>
   );
