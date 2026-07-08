@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import api from '../api/axios'
+import "../candidCompStyle/Resume.css"
 
 const Resume = () => {
   const [file, setFile] = useState(null);
@@ -40,12 +41,30 @@ const Resume = () => {
   return (
     <div className="page">
       <h1>📄 Resume</h1>
-      <div className="card">
+      <div className="resume-card">
         <p>Upload your resume for AI-based interview analysis</p>
-        <input type="file" accept=".pdf,.docx" onChange={handleFileChange} />
-        <button onClick={handleUpload} disabled={status === "uploading"}>
+
+        <label className="resume-dropzone" htmlFor="resume-upload">
+          <span className="resume-dropzone-icon">📎</span>
+          <span className="resume-dropzone-text">
+            {file ? file.name : "Choose a PDF or DOCX file"}
+          </span>
+          <input
+            id="resume-upload"
+            type="file"
+            accept=".pdf,.docx"
+            onChange={handleFileChange}
+          />
+        </label>
+
+        <button
+          className="resume-upload-btn"
+          onClick={handleUpload}
+          disabled={status === "uploading"}
+        >
           {status === "uploading" ? "Uploading..." : "Upload"}
         </button>
+
         {status === "success" && <p className="success">{message}</p>}
         {status === "error" && <p className="error">{message}</p>}
       </div>

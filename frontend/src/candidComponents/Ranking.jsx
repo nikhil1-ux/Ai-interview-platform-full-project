@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../api/axios";
+import "../candidCompStyle/Ranking.css";
 
 
 const medal = (rank) => {

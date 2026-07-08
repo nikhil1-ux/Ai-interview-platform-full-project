@@ -1,0 +1,84 @@
+/* Candidate Resume upload page */
+
+.resume-card {
+  max-width: 480px;
+  margin-top: var(--space-4);
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-6);
+}
+
+.resume-card > p {
+  color: var(--muted-on-paper);
+  margin-bottom: var(--space-5);
+}
+
+.resume-dropzone {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  border: 1px dashed var(--surface-app-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  background: var(--paper-050);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease), background var(--duration-fast) var(--ease);
+}
+
+.resume-dropzone:hover {
+  border-color: var(--verdigris-600);
+  background: var(--paper-100);
+}
+
+.resume-dropzone input[type="file"] {
+  display: none;
+}
+
+.resume-dropzone-icon {
+  font-size: var(--text-xl);
+}
+
+.resume-dropzone-text {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--ink-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resume-upload-btn {
+  width: 100%;
+  margin-top: var(--space-4);
+  background: var(--stamp-red);
+  color: var(--paper-050);
+  border: none;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  transition: background var(--duration-fast) var(--ease);
+}
+
+.resume-upload-btn:hover {
+  background: var(--stamp-red-dark);
+}
+
+.resume-upload-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .resume-card {
+    max-width: 100%;
+    padding: var(--space-5);
+  }
+
+  .resume-dropzone {
+    flex-direction: column;
+    text-align: center;
+  }
+}

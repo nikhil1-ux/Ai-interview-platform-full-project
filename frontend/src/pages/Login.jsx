@@ -1,4 +1,5 @@
 import React from 'react'
+import "../style/Auth.css"
 import "../style/Login.css"
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
@@ -47,7 +48,9 @@ const onSubmit = async (data) => {
 };
 
   return (
+  <div className="auth-page">
   <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+  <p className="auth-eyebrow">Case&nbsp;No. — Access</p>
   <h2>Login</h2>
 
   <select
@@ -93,7 +96,12 @@ const onSubmit = async (data) => {
   <button className="login-btn" type="submit">
     Login
   </button>
+
+  <p className="auth-switch">
+    New here? <a href="/signup">Create an account</a>
+  </p>
 </form>
+  </div>
   )
 }
 

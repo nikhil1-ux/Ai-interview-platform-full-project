@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../api/axios";
+import "../candidCompStyle/Profile.css";
 
 
 const Profile = () => {

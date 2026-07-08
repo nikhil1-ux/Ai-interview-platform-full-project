@@ -1,0 +1,84 @@
+/* Candidate Logout confirmation page */
+
+.logout-card {
+  max-width: 420px;
+  margin-top: var(--space-4);
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-6);
+  text-align: center;
+}
+
+.logout-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto var(--space-4);
+  border-radius: 50%;
+  background: rgba(168, 54, 42, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-2xl);
+}
+
+.logout-card p {
+  color: var(--muted-on-paper);
+  font-size: var(--text-base);
+  margin-bottom: var(--space-5);
+}
+
+.logout-actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.logout-btn {
+  flex: 1;
+  background: var(--stamp-red);
+  color: var(--paper-050);
+  border: none;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  transition: background var(--duration-fast) var(--ease);
+}
+
+.logout-btn:hover {
+  background: var(--stamp-red-dark);
+}
+
+.logout-cancel {
+  flex: 1;
+  background: var(--paper-100);
+  color: var(--ink-text);
+  border: 1px solid var(--surface-app-border);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  transition: background var(--duration-fast) var(--ease);
+}
+
+.logout-cancel:hover {
+  background: var(--paper-200);
+}
+
+.logout-btn:disabled,
+.logout-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .logout-card {
+    max-width: 100%;
+    padding: var(--space-5);
+  }
+
+  .logout-actions {
+    flex-direction: column;
+  }
+}

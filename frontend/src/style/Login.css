@@ -1,62 +1,45 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: #f4f7fc;
-  font-family: Arial, sans-serif;
-}
+/* Login — form-specific rules. Shared intake styling lives in Auth.css */
 
 .login-form {
-  width: 400px;
-  margin: 80px auto;
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
 }
 
 .login-form h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #333;
-}
-
-.input-field {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 15px;
-}
-
-.input-field:focus {
-  outline: none;
-  border-color: #2563eb;
-}
-
-.error {
-  color: red;
-  font-size: 13px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--ink-text);
+  margin-bottom: var(--space-5);
 }
 
 .login-btn {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background: #2563eb;
-  color: white;
+  margin-top: var(--space-5);
+  padding: var(--space-3) var(--space-5);
+  background: var(--stamp-red);
+  color: var(--paper-050);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: background var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
 }
 
 .login-btn:hover {
-  background: #1d4ed8;
+  background: var(--stamp-red-dark);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .login-form {
+    padding: var(--space-5) var(--space-4);
+  }
 }

@@ -1,0 +1,139 @@
+/* Candidate Ranking / leaderboard page */
+
+.page-skeleton,
+.page-error {
+  color: var(--muted-on-paper);
+  margin-top: var(--space-3);
+}
+
+.page-error {
+  color: var(--stamp-red);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.my-rank-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--ink-950);
+  color: var(--paper-050);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-6);
+  margin-top: var(--space-4);
+}
+
+.my-rank-banner p {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-on-dark);
+}
+
+.my-rank-banner h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  margin-top: var(--space-1);
+}
+
+.empty-state {
+  margin-top: var(--space-5);
+  background: var(--surface-app-card);
+  border: 1px dashed var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-7);
+  text-align: center;
+  color: var(--muted-on-paper);
+}
+
+.leaderboard-card {
+  margin-top: var(--space-5);
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 56px 2fr 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--surface-app-border);
+}
+
+.leaderboard-row:last-child {
+  border-bottom: none;
+}
+
+.leaderboard-row.is-you {
+  background: var(--paper-100);
+}
+
+.rank-number {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--muted-on-paper);
+  text-align: center;
+}
+
+.rank-number.top-1,
+.rank-number.top-2,
+.rank-number.top-3 {
+  font-size: var(--text-xl);
+}
+
+.rank-name {
+  color: var(--ink-text);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.rank-you-badge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--stamp-red);
+  color: var(--paper-050);
+}
+
+.rank-interviews {
+  color: var(--muted-on-paper);
+  font-size: var(--text-sm);
+}
+
+.rank-score {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--verdigris-600);
+  text-align: right;
+}
+
+@media (max-width: 560px) {
+  .my-rank-banner {
+    padding: var(--space-4);
+  }
+
+  .my-rank-banner h2 {
+    font-size: var(--text-2xl);
+  }
+
+  .leaderboard-row {
+    grid-template-columns: 40px 1fr auto;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .rank-interviews {
+    display: none;
+  }
+
+  .rank-name {
+    font-size: var(--text-sm);
+  }
+}

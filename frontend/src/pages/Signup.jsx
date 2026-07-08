@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import "../style/Auth.css";
 import "../style/Signup.css";
 import api from "../api/axios";
 
@@ -28,7 +29,9 @@ const Signup = () => {
 };
 
   return (
+    <div className="auth-page">
     <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
+      <p className="auth-eyebrow">Case&nbsp;No. — New Intake</p>
       <h2>Create Account</h2>
 
       {/* Name */}
@@ -215,7 +218,12 @@ const Signup = () => {
       <button className="signup-btn" type="submit">
         Signup
       </button>
+
+      <p className="auth-switch">
+        Already have an account? <a href="/login">Log in</a>
+      </p>
     </form>
+    </div>
   );
 };
 

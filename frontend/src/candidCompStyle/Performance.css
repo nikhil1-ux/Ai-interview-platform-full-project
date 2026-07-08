@@ -1,0 +1,229 @@
+/* Candidate Performance page — also reused by the "Results" nav item
+   (see routing/Rounting.jsx, both point at this component) */
+
+.performance-card {
+  max-width: 480px;
+  margin-top: var(--space-4);
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-6);
+}
+
+.performance-overall {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--surface-app-border);
+}
+
+.performance-overall-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-on-paper);
+}
+
+.performance-overall-value {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  color: var(--ink-text);
+}
+
+.performance-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.performance-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.performance-list-label {
+  color: var(--ink-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.performance-tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+}
+
+.performance-tag.good {
+  background: rgba(63, 107, 94, 0.15);
+  color: var(--verdigris-600);
+}
+
+.performance-tag.needs-improvement {
+  background: rgba(185, 138, 68, 0.18);
+  color: var(--status-pending);
+}
+
+.performance-tag.beginner {
+  background: rgba(168, 54, 42, 0.12);
+  color: var(--stamp-red);
+}
+
+@media (max-width: 480px) {
+  .performance-card {
+    max-width: 100%;
+    padding: var(--space-5);
+  }
+
+  .performance-overall {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+}
+
+/* ---------- PAST RESULTS HISTORY ---------- */
+
+.dashboard-error {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--stamp-red);
+  margin-top: var(--space-3);
+}
+
+.performance-history-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--ink-text);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+.empty-state-box {
+  background: var(--surface-app-card);
+  border: 1px dashed var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--muted-on-paper);
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.result-item {
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.result-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+}
+
+.result-item-header h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  color: var(--ink-text);
+}
+
+.muted {
+  color: var(--muted-on-paper);
+  font-size: var(--text-sm);
+}
+
+.result-item-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.meta-pill {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: rgba(63, 107, 94, 0.15);
+  color: var(--verdigris-600);
+  white-space: nowrap;
+}
+
+.expand-arrow {
+  color: var(--muted-on-paper);
+  font-size: var(--text-xs);
+}
+
+.result-item-body {
+  border-top: 1px solid var(--surface-app-border);
+  padding: var(--space-4) var(--space-5);
+  background: var(--paper-050);
+}
+
+.result-item-body p {
+  font-size: var(--text-sm);
+  color: var(--ink-text);
+  margin-bottom: var(--space-2);
+}
+
+.score-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.score-item {
+  background: var(--surface-app-card);
+  border: 1px solid var(--surface-app-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  text-align: center;
+}
+
+.score-item .label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted-on-paper);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.score-item .value {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--ink-text);
+  margin-top: var(--space-1);
+}
+
+.result-summary-text {
+  font-style: italic;
+  color: var(--muted-on-paper);
+  border-left: 2px solid var(--verdigris-400);
+  padding-left: var(--space-3);
+  margin: var(--space-3) 0;
+}
+
+@media (max-width: 640px) {
+  .score-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .result-item-header {
+    flex-wrap: wrap;
+  }
+}
