@@ -21,7 +21,7 @@ registerInterviewSocket(io);
 // Middlewares
 app.use(
   cors({
-    origin: "https://ai-interview-platform-full-project.vercel.app/",
+    origin: "https://ai-interview-platform-full-project.vercel.app",
     credentials: true,
   })
 );
