@@ -3,8 +3,13 @@ import { useForm } from "react-hook-form";
 import "../style/Auth.css";
 import "../style/Signup.css";
 import api from "../api/axios";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Signup = () => {
+
+  const navigate = useNaviagte();
+  
   const {
     register,
     handleSubmit,
@@ -14,15 +19,28 @@ const Signup = () => {
 
   const role = watch("role", "");
   const password = watch("password");
-
- const onSubmit = async (data) => {
+const onSubmit = async (data) => {
   try {
-    const response = await api.post(
-      "/auth/signup",
-      data
-    );
+    const response = await api.post("/auth/signup", data);
 
     console.log(response.data);
+
+    // Save token
+    localStorage.setItem("token", response.data.accessToken);
+
+    // Save user
+    localStorage.setItem(
+      "user",
+      JSON.stringify(response.data.data)
+    );
+
+    // Redirect according to role
+    if (response.data.data.role === "student") {
+      navigate("/candidate");
+    } else if (response.data.data.role === "recruiter") {
+      navigate("/recruiter");
+    }
+
   } catch (error) {
     console.log(error.response?.data);
   }
@@ -42,8 +60,8 @@ const Signup = () => {
           required: "Name is required",
         })}
       />
-      {errors.username && (
-        <p className="error">{errors.username.message}</p>
+      {errors.name && (
+        <p className="error">{errors.name.message}</p>
       )}
 
       {/* Email */}
