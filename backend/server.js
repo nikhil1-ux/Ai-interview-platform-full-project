@@ -21,7 +21,7 @@ registerInterviewSocket(io);
 // Middlewares
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://ai-interview-platform-full-project-jbvw5vuji.vercel.app/",
     credentials: true,
   })
 );
