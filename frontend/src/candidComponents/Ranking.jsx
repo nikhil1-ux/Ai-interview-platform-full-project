@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../api/axios";
-import "../candidComp.style/Ranking.css";
+
 
 const medal = (rank) => {
   if (rank === 1) return "🥇";

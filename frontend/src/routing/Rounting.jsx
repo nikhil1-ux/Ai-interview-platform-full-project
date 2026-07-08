@@ -9,20 +9,20 @@ import ProtectedRoute from "./ProtectedRoute";
 import RecruiterDashboard from "../pages/RecruiterDashboard";
 import { CandidateDashboard } from "../pages/CandidateDashboard";
 
-import AssignedInterview from "../candidComponents/AssignedInterview";
-import Logout from "../candidComponents/Logout";
-import Performance from "../candidComponents/Performance";
-import Profile from "../candidComponents/Profile";
-import Ranking from "../candidComponents/Ranking";
-import Resume from "../candidComponents/Resume";
-import CreateInterview from "../recruitComponent/CreateInterview";
-import RecruiterHome from "../recruitComponent/RecuiterHome";
-import ManageInterviews from "../recruitComponent/ManageInterviews";
-import Candidates from "../recruitComponent/Candidates";
-import Results from "../recruitComponent/Results";
-import CandidateHome from "../candidComponents/CandidateHome";
+import AssignedInterview from "../candidComponents/AssignedInterview.jsx";
+import Logout from "../candidComponents/Logout.jsx";
+import Performance from "../candidComponents/Performance.jsx";
+import Profile from "../candidComponents/Profile.jsx";
+import Ranking from "../candidComponents/Ranking.jsx";
+import Resume from "../candidComponents/Resume.jsx";
+import CreateInterview from "../recruitComponent/CreateInterviews.jsx";
+import RecruiterHome from "../recruitComponent/RecuiterHome.jsx";
+import ManageInterviews from "../recruitComponent/ManageInterviews.jsx";
+import Candidates from "../recruitComponent/Candidates.jsx";
+import Results from "../recruitComponent/Results.jsx";
+import CandidateHome from "../candidComponents/CandidateHome.jsx";
 import { Outlet } from "react-router-dom";
-import InterviewRoom from "../candidComponents/InterviewRoom";
+import InterviewRoom from "../candidComponents/InterviewRoom.jsx";
 
 const router = createBrowserRouter([
   {

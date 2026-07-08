@@ -141,3 +141,38 @@ export const getCurrentUser = asyncHandler(async (req, res) => {
     new ApiResponse(200, user.toJSON(), "User fetched successfully")
   );
 });
+
+export const updateProfile = asyncHandler(async (req, res) => {
+  
+  const { name, email } = req.body;
+
+  if (!name && !email) {
+    throw new ApiError(400, "At least one field (name or email) is required");
+  }
+
+  // If email is being changed, make sure it's not already taken
+  if (email) {
+    const existingUser = await User.findOne({ email, _id: { $ne: req.user._id } });
+    if (existingUser) {
+      throw new ApiError(409, "Email already in use");
+    }
+  }
+
+  const updateFields = {};
+  if (name) updateFields.name = name;
+  if (email) updateFields.email = email;
+
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    { $set: updateFields },
+    { new: true, runValidators: true }
+  );
+
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+
+  return res.status(200).json(
+    new ApiResponse(200, user.toJSON(), "Profile updated successfully")
+  );
+});

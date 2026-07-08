@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../api/axios";
-import "../candidComp.style/Profile.css";
+
 
 const Profile = () => {
   const [user, setUser] = useState(null);
