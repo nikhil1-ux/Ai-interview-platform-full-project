@@ -1,12 +1,36 @@
-import ai from "../config/gemini.js";
+import groq from "../config/groq.js";
 
-const MODEL = "gemini-2.5-flash";
+// Llama 3.3 70B — strong general-purpose quality, fast, and on Groq's free tier.
+// Swap this string if you want to try a different Groq model (e.g. "openai/gpt-oss-120b").
+const MODEL = "llama-3.3-70b-versatile";
 
 /**
- * Removes markdown code blocks from Gemini responses.
+ * Removes markdown code fences some models still wrap JSON in, even when
+ * asked for raw JSON.
  */
 const stripJson = (text) => {
   return text.replace(/```json|```/g, "").trim();
+};
+
+/**
+ * Sends a single-turn prompt to Groq and returns the parsed JSON response.
+ * Centralizes the request/parse boilerplate shared by all three AI calls
+ * below.
+ */
+const askForJson = async ({ systemPrompt, userPrompt }) => {
+  const response = await groq.chat.completions.create({
+    model: MODEL,
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userPrompt },
+    ],
+    // Groq's OpenAI-compatible endpoint supports forcing valid JSON output.
+    response_format: { type: "json_object" },
+    temperature: 0.7,
+  });
+
+  const text = response.choices?.[0]?.message?.content || "";
+  return JSON.parse(stripJson(text));
 };
 
 /**
@@ -21,9 +45,7 @@ export const generateQuestion = async ({
   previousAnswer = "",
 }) => {
   try {
-    const prompt = `
-You are an experienced technical interviewer.
-
+    const userPrompt = `
 JOB ROLE
 --------
 ${jobRole}
@@ -57,21 +79,17 @@ Instructions:
 5. Increase difficulty gradually.
 6. Ask practical interview questions.
 
-Return ONLY valid JSON.
+Return ONLY valid JSON in this exact shape:
 
 {
-  "question":"Your question here"
+  "question": "Your question here"
 }
 `;
 
-    const response = await ai.models.generateContent({
-      model: MODEL,
-      contents: prompt,
+    return await askForJson({
+      systemPrompt: "You are an experienced technical interviewer.",
+      userPrompt,
     });
-
-    const text = stripJson(response.text);
-
-    return JSON.parse(text);
   } catch (error) {
     console.error("Generate Question Error:", error);
 
@@ -82,14 +100,9 @@ Return ONLY valid JSON.
 /**
  * Evaluate Candidate Answer
  */
-export const evaluateAnswer = async ({
-  question,
-  answer,
-}) => {
+export const evaluateAnswer = async ({ question, answer }) => {
   try {
-    const prompt = `
-You are a Senior Technical Interviewer.
-
+    const userPrompt = `
 QUESTION
 
 ${question}
@@ -105,29 +118,25 @@ Evaluate the answer on:
 - Completeness
 - Problem Solving
 
-Return ONLY JSON.
+Return ONLY valid JSON in this exact shape:
 
 {
-    "score":85,
-    "strengths":[
+    "score": 85,
+    "strengths": [
         "Point 1",
         "Point 2"
     ],
-    "weaknesses":[
+    "weaknesses": [
         "Point 1"
     ],
-    "feedback":"Detailed feedback"
+    "feedback": "Detailed feedback"
 }
 `;
 
-    const response = await ai.models.generateContent({
-      model: MODEL,
-      contents: prompt,
+    return await askForJson({
+      systemPrompt: "You are a Senior Technical Interviewer.",
+      userPrompt,
     });
-
-    const text = stripJson(response.text);
-
-    return JSON.parse(text);
   } catch (error) {
     console.error("Evaluate Answer Error:", error);
 
@@ -140,9 +149,7 @@ Return ONLY JSON.
  */
 export const generateFinalReport = async (interviewData) => {
   try {
-    const prompt = `
-You are an experienced HR recruiter.
-
+    const userPrompt = `
 Below is complete interview data.
 
 ${JSON.stringify(interviewData)}
@@ -157,39 +164,35 @@ Generate
 6. Hiring Recommendation
 7. Strengths
 8. Weaknesses
-9 . Areas of Improvement
+9. Areas of Improvement
 
-Return ONLY JSON.
+Return ONLY valid JSON in this exact shape:
 
 {
-    "overallScore":90,
-    "technical":88,
-    "communication":85,
-    "confidence":91,
-     "problemSolving":87,
-    "recommendation":"Hire",
-    "strengths":[
+    "overallScore": 90,
+    "technical": 88,
+    "communication": 85,
+    "confidence": 91,
+    "problemSolving": 87,
+    "recommendation": "Hire",
+    "strengths": [
         "Point 1",
         "Point 2"
     ],
-    "weaknesses":[
+    "weaknesses": [
         "Point 1"
     ],
-    "improvement":[
+    "improvement": [
         "Point 1",
         "Point 2"
     ]
 }
 `;
 
-    const response = await ai.models.generateContent({
-      model: MODEL,
-      contents: prompt,
+    return await askForJson({
+      systemPrompt: "You are an experienced HR recruiter.",
+      userPrompt,
     });
-
-    const text = stripJson(response.text);
-
-    return JSON.parse(text);
   } catch (error) {
     console.error("Final Report Error:", error);
 
