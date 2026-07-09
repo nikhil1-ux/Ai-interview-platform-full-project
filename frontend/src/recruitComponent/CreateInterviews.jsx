@@ -15,13 +15,12 @@ const CreateInterview = () => {
 const onSubmit = async (data) => {
   try {
    
-    toast.success(response.data.message || "Interview Created Successfully!");
-    
-    const response = await api.post(
+   const response = await api.post(
       "/auth/create",
       data
     );
     
+     toast.success(response.data.message || "Interview Created Successfully!");
     
     reset();
   } 
