@@ -37,22 +37,8 @@ export const createAndAssignInterviews = asyncHandler(async(req,res)=>{
     candidateId: candidate._id,
   });
 
-await sendEmail({
-  to: candidate.email,
-  subject: "Interview Invitation",
-  html: `
-    <h2>Hello ${candidate.name}</h2>
-
-    <p>Your interview has been scheduled.</p>
-
-    <p>Role: ${interview.jobRole}</p>
-
-    <p>Duration: ${interview.duration} mins</p>
-  `,
-});
- 
-
-  return res.status(201).json(
+  // Respond immediately — don't make the client wait on email delivery
+  res.status(201).json(
     new ApiResponse(200,
       {
         interview,
@@ -60,7 +46,24 @@ await sendEmail({
       },
       "Interview created, assigned and email sent"
     )
-  )
+  );
+
+  // Fire the email in the background; failures here should never break the request
+  sendEmail({
+    to: candidate.email,
+    subject: "Interview Invitation",
+    html: `
+      <h2>Hello ${candidate.name}</h2>
+
+      <p>Your interview has been scheduled.</p>
+
+      <p>Role: ${interview.jobRole}</p>
+
+      <p>Duration: ${interview.duration} mins</p>
+    `,
+  }).catch((err) => {
+    console.error("Failed to send interview invitation email:", err.message);
+  });
 });
 
 export const getMyInterview = asyncHandler(async (req,res)=>{

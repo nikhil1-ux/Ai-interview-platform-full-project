@@ -9,7 +9,7 @@ const CreateInterview = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
 const onSubmit = async (data) => {
@@ -142,8 +142,8 @@ const onSubmit = async (data) => {
           <p>{errors.email?.message}</p>
         </div>
 
-        <button type="submit">
-          Create Interview
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Creating..." : "Create Interview"}
         </button>
       </form>
     </div>
