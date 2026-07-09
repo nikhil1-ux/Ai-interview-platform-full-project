@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 // Same host your axios instance points to (see src/api/axios.js),
 // just without the /api/v1 prefix since Socket.IO connects at the
 // server root, not a REST path.
-const SOCKET_URL = "http://localhost:5000";
+const SOCKET_URL = "https://ai-interview-platform-full-project.onrender.com";
  
 let socket = null;
  

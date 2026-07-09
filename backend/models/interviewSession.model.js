@@ -45,6 +45,11 @@ const responseSchema = new mongoose.Schema(
       default: 0,
     },
 
+    askedAt: {
+      type: Date,
+      default: Date.now,
+    },
+
     answeredAt: {
       type: Date,
       default: Date.now,

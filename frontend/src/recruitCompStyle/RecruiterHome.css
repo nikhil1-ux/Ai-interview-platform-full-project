@@ -98,6 +98,7 @@
 .quick-actions h2{
     font-size:20px;
     margin-bottom:18px;
+    color:#111827;
 }
 
 .quick-actions button{
@@ -140,6 +141,7 @@
 
 .table-section h2{
     margin-bottom:20px;
+    color:#111827;
 }
 
 .table-section table{
@@ -158,6 +160,11 @@
 .table-section th,
 .table-section td{
     padding:15px;
+    color:#111827;
+}
+
+.table-section th{
+    color:#6b7280;
 }
 
 .table-section tbody tr{

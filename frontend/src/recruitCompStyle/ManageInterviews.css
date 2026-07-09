@@ -202,6 +202,125 @@
     margin-bottom:20px;
 }
 
+/* ---------- Icon buttons (edit / delete) ---------- */
+
+.iconBtn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:32px;
+    height:32px;
+    border-radius:8px;
+    border:1px solid #e5e7eb;
+    background:#fff;
+    color:#374151;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.iconBtn:hover{
+    background:#f3f4f6;
+    border-color:#d1d5db;
+}
+
+.iconBtnDanger{
+    color:#dc2626;
+}
+
+.iconBtnDanger:hover{
+    background:#fee2e2;
+    border-color:#fecaca;
+}
+
+/* ---------- Delete confirmation bar ---------- */
+
+.confirm-delete-bar{
+    background:#fef2f2;
+    border-top:1px solid #fecaca;
+    padding:16px 20px;
+    cursor:default;
+}
+
+.confirm-delete-bar p{
+    color:#991b1b;
+    margin:0 0 12px;
+}
+
+.confirm-delete-actions{
+    display:flex;
+    gap:10px;
+}
+
+.dangerBtn{
+    background:#dc2626;
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.dangerBtn:hover{
+    background:#b91c1c;
+}
+
+.dangerBtn:disabled,
+.confirm-delete-actions button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+/* ---------- Inline edit form ---------- */
+
+.edit-interview-form{
+    cursor:default;
+}
+
+.edit-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:14px;
+    margin-bottom:16px;
+}
+
+.edit-grid label{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    font-size:13px;
+    font-weight:600;
+    color:#374151;
+}
+
+.edit-grid .edit-skills{
+    grid-column:1 / -1;
+}
+
+.edit-grid input{
+    font-family:inherit;
+    font-size:14px;
+    font-weight:400;
+    padding:10px 12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    outline:none;
+    transition:.2s;
+    color:#111827;
+    background:#fff;
+}
+
+.edit-grid input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+
+.edit-actions{
+    display:flex;
+    gap:10px;
+}
+
 /* ---------- Responsive ---------- */
 
 @media(max-width:768px){
@@ -223,6 +342,20 @@
 .mini-table{
     display:block;
     overflow-x:auto;
+}
+
+.edit-grid{
+    grid-template-columns:1fr;
+}
+
+.confirm-delete-actions,
+.edit-actions{
+    flex-direction:column;
+}
+
+.confirm-delete-actions button,
+.edit-actions button{
+    width:100%;
 }
 
 }

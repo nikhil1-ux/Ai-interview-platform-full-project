@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios.js";
 import "../candidCompStyle/AssignedInterview.css";
+import toast from "react-hot-toast";
  
 const AssignedInterview = () => {
   const [assignments, setAssignments] = useState([]);
@@ -17,13 +18,16 @@ const AssignedInterview = () => {
   useEffect(() => {
     const fetchInterviews = async () => {
       try {
+        toast.loading("Loading interviews...");
         setLoading(true);
         setError(null);
  
         const res = await api.get("/auth/my-interviews");
         setAssignments(res.data.data.assignments || []);
       } catch (err) {
-        console.error("Fetch interviews error:", err);
+       toast.error(
+          err.response?.data?.message || "Failed to load interviews"
+        );
         setError(
           err.response?.data?.message || "Failed to load interviews"
         );

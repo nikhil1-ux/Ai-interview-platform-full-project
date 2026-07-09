@@ -3,6 +3,14 @@ import { useParams, useLocation } from "react-router-dom";
 import { connectSocket, getSocket, disconnectSocket } from "../socket/socket";
 import "../candidCompStyle/InterviewRoom.css";
 
+
+const formatTime = (totalSeconds) => {
+  const s = Math.max(0, totalSeconds);
+  const minutes = Math.floor(s / 60);
+  const seconds = s % 60;
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
+};
+
 const InterviewRoom = () => {
   const { sessionId } = useParams();
   const location = useLocation();
@@ -13,14 +21,30 @@ const InterviewRoom = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const [currentQuestion, setCurrentQuestion] = useState(null);
-  // shape: { questionId, question, questionIndex, totalQuestions }
+  // shape: { questionId, question, questionIndex, totalQuestions, timeLimit }
 
   const [answerText, setAnswerText] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [lastFeedback, setLastFeedback] = useState(null);
   const [finalReport, setFinalReport] = useState(null);
 
+  const [timeLimit, setTimeLimit] = useState(null); // seconds, for the progress bar
+  const [secondsLeft, setSecondsLeft] = useState(null);
+  const [autoSubmitted, setAutoSubmitted] = useState(false);
+
   const questionStartedAtRef = useRef(null);
+  const answerTextRef = useRef("");
+  const submittingRef = useRef(false);
+  const timerIntervalRef = useRef(null);
+
+  // keep refs in sync so the interval callback always sees fresh values
+  useEffect(() => {
+    answerTextRef.current = answerText;
+  }, [answerText]);
+
+  useEffect(() => {
+    submittingRef.current = submitting;
+  }, [submitting]);
 
   useEffect(() => {
     if (!sessionId) return;
@@ -45,6 +69,12 @@ const InterviewRoom = () => {
       setStatus("in-progress");
       questionStartedAtRef.current = Date.now();
       setSubmitting(false);
+      setAutoSubmitted(false);
+
+      const limit = data.timeLimit ?? null;
+      const remaining = data.timeRemaining ?? data.timeLimit ?? null;
+      setTimeLimit(limit);
+      setSecondsLeft(remaining);
     };
 
     const handleAnswerEvaluated = (data) => {
@@ -57,6 +87,8 @@ const InterviewRoom = () => {
       setCurrentQuestion(null);
       setStatus("completed");
       setSubmitting(false);
+      setSecondsLeft(null);
+      setTimeLimit(null);
     };
 
     const handleInterviewError = (data) => {
@@ -85,22 +117,47 @@ const InterviewRoom = () => {
     };
   }, [sessionId]);
 
-  const handleSubmitAnswer = () => {
-    if (!currentQuestion || !answerText.trim() || submitting) return;
+  const handleSubmitAnswer = (auto = false) => {
+    if (!currentQuestion || submittingRef.current) return;
+
+    const trimmed = answerTextRef.current.trim();
+    if (!auto && !trimmed) return; // manual submit still requires text
 
     const timeTaken = questionStartedAtRef.current
       ? Math.round((Date.now() - questionStartedAtRef.current) / 1000)
       : 0;
 
     setSubmitting(true);
+    if (auto) setAutoSubmitted(true);
 
     getSocket().emit("submit-answer", {
       sessionId,
       questionId: currentQuestion.questionId,
-      answer: answerText.trim(),
+      answer: trimmed || "(No answer submitted — time ran out)",
       timeTaken,
     });
   };
+
+  // Countdown timer: ticks every second while a question is active and
+  // nothing has been submitted yet; auto-submits whatever's typed (or a
+  // placeholder) the moment it hits zero.
+  useEffect(() => {
+    if (secondsLeft === null || status !== "in-progress" || submitting) {
+      return;
+    }
+
+    if (secondsLeft <= 0) {
+      handleSubmitAnswer(true);
+      return;
+    }
+
+    timerIntervalRef.current = setTimeout(() => {
+      setSecondsLeft((prev) => (prev === null ? null : prev - 1));
+    }, 1000);
+
+    return () => clearTimeout(timerIntervalRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [secondsLeft, status, submitting]);
 
   if (status === "error") {
     return (
@@ -170,10 +227,39 @@ const InterviewRoom = () => {
           <p>Connecting to your interviewer...</p>
         ) : (
           <>
-            <p className="question-meta">
-              Question {currentQuestion.questionIndex} of{" "}
-              {currentQuestion.totalQuestions}
-            </p>
+            <div className="question-top-row">
+              <p className="question-meta">
+                Question {currentQuestion.questionIndex} of{" "}
+                {currentQuestion.totalQuestions}
+              </p>
+
+              {secondsLeft !== null && (
+                <div
+                  className={`question-timer ${
+                    secondsLeft <= 10 ? "question-timer-critical" : ""
+                  }`}
+                  aria-live="polite"
+                >
+                  ⏱ {formatTime(secondsLeft)}
+                </div>
+              )}
+            </div>
+
+            {timeLimit && secondsLeft !== null && (
+              <div className="timer-bar-track">
+                <div
+                  className={`timer-bar-fill ${
+                    secondsLeft <= 10 ? "timer-bar-critical" : ""
+                  }`}
+                  style={{
+                    width: `${Math.max(
+                      0,
+                      Math.min(100, (secondsLeft / timeLimit) * 100)
+                    )}%`,
+                  }}
+                />
+              </div>
+            )}
 
             <p className="question-text">💬 {currentQuestion.question}</p>
 
@@ -182,6 +268,12 @@ const InterviewRoom = () => {
                 <p><b>Previous score:</b> {lastFeedback.score}/100</p>
                 <p>{lastFeedback.feedback}</p>
               </div>
+            )}
+
+            {autoSubmitted && submitting && (
+              <p className="auto-submit-note">
+                ⏱ Time's up — your answer was submitted automatically.
+              </p>
             )}
 
             <textarea
@@ -193,7 +285,7 @@ const InterviewRoom = () => {
             />
 
             <button
-              onClick={handleSubmitAnswer}
+              onClick={() => handleSubmitAnswer(false)}
               disabled={submitting || !answerText.trim()}
             >
               {submitting ? "Evaluating..." : "Submit Answer"}

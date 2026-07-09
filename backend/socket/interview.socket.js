@@ -52,6 +52,21 @@ const buildQuestionPayload = (interview, session, resume) => ({
 });
 
 /**
+ * Works out how many seconds a candidate gets per question, spreading the
+ * interview's total duration (minutes) evenly across all questions.
+ * Falls back to a sane default when the recruiter didn't set a duration.
+ */
+const getPerQuestionSeconds = (interview, totalQuestions) => {
+  const DEFAULT_SECONDS = 120; // 2 minutes/question fallback
+  const MIN_SECONDS = 30; // never give less than 30s, even for short interviews
+
+  if (!interview?.duration || !totalQuestions) return DEFAULT_SECONDS;
+
+  const perQuestion = Math.round((interview.duration * 60) / totalQuestions);
+  return Math.max(MIN_SECONDS, perQuestion);
+};
+
+/**
  * Generates the next question, stores it on the session as a pending
  * response (answer/score empty until the candidate replies) and emits
  * it to the interview room.
@@ -62,6 +77,8 @@ const sendNextQuestion = async (io, session, interview, resume) => {
   );
 
   const questionId = crypto.randomUUID();
+  const askedAt = new Date();
+  const timeLimit = getPerQuestionSeconds(interview, session.totalQuestions);
 
   session.responses.push({
     questionId,
@@ -72,6 +89,7 @@ const sendNextQuestion = async (io, session, interview, resume) => {
     score: null,
     feedback: "",
     timeTaken: 0,
+    askedAt,
   });
 
   session.currentQuestionIndex += 1;
@@ -83,6 +101,8 @@ const sendNextQuestion = async (io, session, interview, resume) => {
     question,
     questionIndex: session.currentQuestionIndex,
     totalQuestions: session.totalQuestions,
+    timeLimit,
+    timeRemaining: timeLimit,
   });
 };
 
@@ -185,11 +205,22 @@ export const registerInterviewSocket = (io) => {
 
         // Resume an unanswered question, otherwise generate a fresh one
         if (pending && pending.score === null) {
+          const timeLimit = getPerQuestionSeconds(
+            session.interviewId,
+            session.totalQuestions
+          );
+          const elapsedSeconds = pending.askedAt
+            ? Math.floor((Date.now() - new Date(pending.askedAt).getTime()) / 1000)
+            : 0;
+          const timeRemaining = Math.max(0, timeLimit - elapsedSeconds);
+
           socket.emit("new-question", {
             questionId: pending.questionId,
             question: pending.question,
             questionIndex: session.currentQuestionIndex,
             totalQuestions: session.totalQuestions,
+            timeLimit,
+            timeRemaining,
           });
         } else {
           await sendNextQuestion(

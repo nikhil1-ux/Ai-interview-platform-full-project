@@ -19,6 +19,15 @@ export const CandidateDashboard = () => {
     };
   }, [menuOpen]);
 
+  // switch body to the lighter "paper" text/background register used by
+  // logged-in dashboards, instead of the dark marketing-page defaults
+  useEffect(() => {
+    document.body.classList.add("app-shell");
+    return () => {
+      document.body.classList.remove("app-shell");
+    };
+  }, []);
+
   return (
     <div className="layout">
 

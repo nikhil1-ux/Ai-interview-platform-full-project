@@ -22,6 +22,8 @@ import { verifyJWT } from "../middleware/auth.middleware.js";
 import {
   createAndAssignInterviews,
   getMyInterview,
+  updateInterview,
+  deleteInterview,
 } from "../controllers/interview.controller.js";
  
 import {
@@ -43,6 +45,8 @@ router.post("/refresh-token", refreshAccessToken);
 router.post("/create", verifyJWT, createAndAssignInterviews);
 router.get("/my-interviews", verifyJWT, getMyInterview);
 router.post("/assignment/:id/start",verifyJWT,startInterview);
+router.patch("/recruiter/interviews/:id", verifyJWT, updateInterview);
+router.delete("/recruiter/interviews/:id", verifyJWT, deleteInterview);
  
 // Resume routes
 router.post(

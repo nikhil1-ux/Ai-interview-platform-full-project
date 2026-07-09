@@ -116,6 +116,11 @@
 .table-section-table th,
 .table-section-table td{
     padding:16px 18px;
+    color:#111827;
+}
+
+.table-section-table th{
+    color:#6b7280;
 }
 
 .table-section-table tbody tr{

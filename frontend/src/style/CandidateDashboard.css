@@ -16,6 +16,7 @@
 /* ---------- SIDEBAR ---------- */
 .sidebar {
   width: 260px;
+  box-sizing: border-box;
   flex-shrink: 0;
   background: var(--surface-app-sidebar);
   color: var(--cream);
@@ -451,7 +452,8 @@
     top: 0;
     width: 260px;
     max-width: 80vw;
-    height: 100%;
+    height: 100vh;
+    height: 100dvh;
     z-index: var(--z-sidebar);
     box-shadow: var(--shadow-md, 0 10px 30px rgba(0, 0, 0, 0.3));
     transition: left 0.28s ease;

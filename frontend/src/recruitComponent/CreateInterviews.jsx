@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import api from "../api/axios.js";
 import "../recruitCompStyle/CreateInterview.css"
+import toast from "react-hot-toast";
 
 const CreateInterview = () => {
   const {
@@ -10,24 +11,24 @@ const CreateInterview = () => {
     reset,
     formState: { errors },
   } = useForm();
+
 const onSubmit = async (data) => {
   try {
-    console.log("Sending data:", data);  // See what you're sending
+   
+    toast.success(response.data.message || "Interview Created Successfully!");
     
     const response = await api.post(
       "/auth/create",
       data
     );
     
-    console.log("Response:", response.data);
-    alert("Interview Created Successfully");
-    reset();
-  } catch (error) {
-    console.error("Full error object:", error);
-    console.error("Error response:", error.response?.data);
-    console.error("Error message:", error.message);
     
-    alert(`Error: ${error.response?.data?.message || error.message}`);
+    reset();
+  } 
+  catch (error) {
+    toast.error(
+      error.response?.data?.message || "Failed to create interview."
+    );
   }
 };
 
