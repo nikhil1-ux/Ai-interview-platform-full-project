@@ -449,6 +449,8 @@ tr.empty-row td,
   justify-content: space-between;
   position: sticky;
   top: 0;
+  min-height: 64px;
+  box-sizing: border-box;
   z-index: calc(var(--z-sidebar) + 1);
 }
 
@@ -496,11 +498,11 @@ tr.empty-row td,
   .sidebar {
     position: fixed;
     left: -280px;
-    top: 0;
+    top: 64px;
     width: 250px;
     max-width: 80vw;
-    height: 100vh;
-    height: 100dvh;
+    height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
     z-index: var(--z-sidebar);
     box-shadow: var(--shadow-md, 0 10px 30px rgba(0, 0, 0, 0.3));
     transition: left 0.28s ease;

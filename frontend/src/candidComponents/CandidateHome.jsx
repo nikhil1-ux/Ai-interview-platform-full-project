@@ -121,13 +121,13 @@ const CandidateHome = () => {
         <h2>⚡ Quick Actions</h2>
 
         <div className="action-buttons">
-          <button onClick={() => navigate("../assigned-interviews")}>
+          <button onClick={() => navigate("/candidate-dashboard/assigned-interviews")}>
             🎤 Start Interview
           </button>
-          <button onClick={() => navigate("../resume")}>
+          <button onClick={() => navigate("/candidate-dashboard/resume")}>
             📄 Upload Resume
           </button>
-          <button onClick={() => navigate("../results")}>
+          <button onClick={() => navigate("/candidate-dashboard/results")}>
             📊 View Results
           </button>
         </div>

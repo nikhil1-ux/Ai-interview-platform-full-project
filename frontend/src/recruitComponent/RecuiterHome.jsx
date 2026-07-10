@@ -75,7 +75,7 @@ const RecruiterHome = () => {
       <div className="quick-actions">
         <h2>Quick Actions</h2>
 
-        <button onClick={() => navigate("create-interview")}>
+        <button onClick={() => navigate("/recruiter-dashboard/create-interview")}>
           Create Interview
         </button>
         <button onClick={() => document.getElementById("candidates-table")?.scrollIntoView({ behavior: "smooth" })}>
