@@ -140,6 +140,10 @@ const finalizeInterview = async (io, session, interview) => {
 
   await session.save();
 
+  await Assignment.findByIdAndUpdate(session.assignmentId, {
+    status: "completed",
+  });
+
   io.to(session.sessionToken).emit("interview-completed", {
     sessionId: session.sessionToken,
     finalReport: session.finalReport,

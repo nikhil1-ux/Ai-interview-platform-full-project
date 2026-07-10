@@ -20,19 +20,21 @@ const Signup = () => {
 
   const role = watch("role", "");
   const password = watch("password");
-
 const onSubmit = async (data) => {
   try {
     const response = await api.post("/auth/signup", data);
 
     toast.success("Signup successful!");
 
-    // Save user/token if needed
-    localStorage.setItem("token", response.data.accessToken);
-    localStorage.setItem("user", JSON.stringify(response.data.data));
+    const { accessToken, user } = response.data.data;
+
+    // Save user/token — keys must match what axios.js reads
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("role", user.role);
+    localStorage.setItem("user", JSON.stringify(user));
 
     setTimeout(() => {
-      if (response.data.data.role === "student") {
+      if (user.role === "student") {
         navigate("/candidate-dashboard");
       } else {
         navigate("/recruiter-dashboard");
