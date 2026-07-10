@@ -67,6 +67,11 @@ export const startInterview = asyncHandler(async (req, res) => {
       activeSocketId: null,
       isConnected: false,
     });
+
+    if (assignment.status === "assigned" || assignment.status === "accepted") {
+      assignment.status = "in-progress";
+      await assignment.save();
+    }
   }
 
   return res.status(200).json(
@@ -91,4 +96,3 @@ export const startInterview = asyncHandler(async (req, res) => {
     )
   );
 });
-
