@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { connectSocket, getSocket, disconnectSocket } from "../socket/socket";
 import "../candidCompStyle/InterviewRoom.css";
 
@@ -14,6 +14,7 @@ const formatTime = (totalSeconds) => {
 const InterviewRoom = () => {
   const { sessionId } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const interviewTitle = location.state?.interviewTitle;
 
   // "connecting" | "in-progress" | "completed" | "error"
@@ -127,6 +128,12 @@ const InterviewRoom = () => {
       ? Math.round((Date.now() - questionStartedAtRef.current) / 1000)
       : 0;
 
+    // Lock synchronously first — setSubmitting(true) alone isn't enough
+    // because submittingRef only catches up after the next render, which
+    // leaves a window for a fast double-click/double-Enter to slip through
+    // and trigger two "submit-answer" emits (and two evaluations) for the
+    // same question.
+    submittingRef.current = true;
     setSubmitting(true);
     if (auto) setAutoSubmitted(true);
 
@@ -208,6 +215,13 @@ const InterviewRoom = () => {
         ) : (
           <p>This interview has already been completed.</p>
         )}
+
+        <button
+          className="dashboard-return-btn"
+          onClick={() => navigate("/candidate-dashboard")}
+        >
+          🏠 Go to Dashboard
+        </button>
       </div>
     );
   }

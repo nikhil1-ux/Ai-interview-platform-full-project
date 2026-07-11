@@ -247,6 +247,24 @@ textarea:disabled {
   font-size: var(--text-sm);
 }
 
+.dashboard-return-btn {
+  margin-top: var(--space-5);
+  background: var(--stamp-red);
+  color: var(--paper-050);
+  border: none;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
+}
+
+.dashboard-return-btn:hover {
+  background: var(--stamp-red-dark);
+  transform: translateY(-1px);
+}
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 640px) {
   .interview-room {
