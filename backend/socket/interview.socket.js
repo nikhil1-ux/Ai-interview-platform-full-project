@@ -75,7 +75,23 @@ const sendNextQuestion = async (io, session, interview, resume) => {
   const { question } = await generateQuestion(
     buildQuestionPayload(interview, session, resume)
   );
+  applyNextQuestion(io, session, interview, question);
+  await session.save();
+};
 
+// Pure AI call — no session mutation, no save, no emit. Lets the caller
+// kick this off in parallel with other work (e.g. scoring the previous
+// answer) instead of waiting on it sequentially.
+const generateNextQuestionText = async (interview, session, resume) => {
+  const { question } = await generateQuestion(
+    buildQuestionPayload(interview, session, resume)
+  );
+  return question;
+};
+
+// Applies an already-generated question to the session (mutates in memory
+// only — caller is responsible for session.save()) and emits it.
+const applyNextQuestion = (io, session, interview, question) => {
   const questionId = crypto.randomUUID();
   const askedAt = new Date();
   const timeLimit = getPerQuestionSeconds(interview, session.totalQuestions);
@@ -94,7 +110,6 @@ const sendNextQuestion = async (io, session, interview, resume) => {
 
   session.currentQuestionIndex += 1;
   session.status = "in-progress";
-  await session.save();
 
   io.to(session.sessionToken).emit("new-question", {
     questionId,
@@ -267,20 +282,40 @@ export const registerInterviewSocket = (io) => {
           throw new Error("Question not found for this session");
         }
 
-        const evaluation = await evaluateAnswer({
-          question: response.question,
-          answer,
-        });
-
+        // Set the raw answer immediately — the next question's prompt only
+        // needs this text, not the AI's score/feedback on it, so there's no
+        // reason to make that call wait on evaluation finishing first.
         response.answer = answer;
-        response.score = evaluation.score ?? 0;
-        response.feedback = evaluation.feedback ?? "";
         response.timeTaken = timeTaken ?? 0;
         response.answeredAt = new Date();
 
+        const isLastQuestion =
+          session.questionsAnswered + 1 >= session.totalQuestions;
+
+        const candidate = isLastQuestion
+          ? null
+          : await User.findById(socket.user._id);
+
+        // Kick off both AI calls together instead of one after another.
+        const [evaluation, nextQuestionText] = await Promise.all([
+          evaluateAnswer({
+            question: response.question,
+            answer,
+          }),
+          isLastQuestion
+            ? Promise.resolve(null)
+            : generateNextQuestionText(
+                session.interviewId,
+                session,
+                candidate?.resumeText
+              ),
+        ]);
+
+        response.score = evaluation.score ?? 0;
+        response.feedback = evaluation.feedback ?? "";
+
         session.questionsAnswered += 1;
         session.lastSeen = new Date();
-        await session.save();
 
         socket.emit("answer-evaluated", {
           questionId,
@@ -290,16 +325,12 @@ export const registerInterviewSocket = (io) => {
           weaknesses: evaluation.weaknesses ?? [],
         });
 
-        if (session.questionsAnswered >= session.totalQuestions) {
+        if (isLastQuestion) {
+          await session.save();
           await finalizeInterview(io, session, session.interviewId);
         } else {
-          const candidate = await User.findById(socket.user._id);
-          await sendNextQuestion(
-            io,
-            session,
-            session.interviewId,
-            candidate?.resumeText
-          );
+          applyNextQuestion(io, session, session.interviewId, nextQuestionText);
+          await session.save();
         }
       } catch (error) {
         console.error("submit-answer error:", error.message);

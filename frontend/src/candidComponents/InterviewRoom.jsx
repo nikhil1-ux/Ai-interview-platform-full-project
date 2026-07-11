@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { connectSocket, getSocket, disconnectSocket } from "../socket/socket";
 import "../candidCompStyle/InterviewRoom.css";
-import { Navigate } from "react-router-dom";
 
 
 const formatTime = (totalSeconds) => {
@@ -38,6 +37,7 @@ const InterviewRoom = () => {
   const answerTextRef = useRef("");
   const submittingRef = useRef(false);
   const timerIntervalRef = useRef(null);
+  const submitTimeoutRef = useRef(null);
 
   // keep refs in sync so the interval callback always sees fresh values
   useEffect(() => {
@@ -65,12 +65,14 @@ const InterviewRoom = () => {
     };
 
     const handleNewQuestion = (data) => {
+      clearTimeout(submitTimeoutRef.current);
       setCurrentQuestion(data);
       setAnswerText("");
       setLastFeedback(null);
       setStatus("in-progress");
       questionStartedAtRef.current = Date.now();
       setSubmitting(false);
+      submittingRef.current = false;
       setAutoSubmitted(false);
 
       const limit = data.timeLimit ?? null;
@@ -80,22 +82,43 @@ const InterviewRoom = () => {
     };
 
     const handleAnswerEvaluated = (data) => {
+      clearTimeout(submitTimeoutRef.current);
       setLastFeedback(data);
-      setSubmitting(false);
+      // Stay locked — submitting only clears once the next question (or
+      // interview-completed) actually arrives. Clearing it here left a gap
+      // where the button re-enabled for the same, already-answered
+      // question while the next one was still being generated.
+
+      // Restart the safety net for this second stage of the wait (waiting
+      // on the next question / final report), so a hang here doesn't leave
+      // the candidate stuck with no way to recover either.
+      submitTimeoutRef.current = setTimeout(() => {
+        if (submittingRef.current) {
+          submittingRef.current = false;
+          setSubmitting(false);
+          setErrorMessage(
+            "The server took too long to load the next question. Please refresh and continue."
+          );
+        }
+      }, 20000);
     };
 
     const handleInterviewCompleted = (data) => {
+      clearTimeout(submitTimeoutRef.current);
       setFinalReport(data.finalReport);
       setCurrentQuestion(null);
       setStatus("completed");
       setSubmitting(false);
+      submittingRef.current = false;
       setSecondsLeft(null);
       setTimeLimit(null);
     };
 
     const handleInterviewError = (data) => {
+      clearTimeout(submitTimeoutRef.current);
       setErrorMessage(data.message || "Something went wrong");
       setSubmitting(false);
+      submittingRef.current = false;
     };
 
     socket.on("connect_error", handleConnectError);
@@ -115,6 +138,7 @@ const InterviewRoom = () => {
       socket.off("answer-evaluated", handleAnswerEvaluated);
       socket.off("interview-completed", handleInterviewCompleted);
       socket.off("interview-error", handleInterviewError);
+      clearTimeout(submitTimeoutRef.current);
       disconnectSocket();
     };
   }, [sessionId]);
@@ -136,6 +160,7 @@ const InterviewRoom = () => {
     // same question.
     submittingRef.current = true;
     setSubmitting(true);
+    setErrorMessage(null);
     if (auto) setAutoSubmitted(true);
 
     getSocket().emit("submit-answer", {
@@ -144,6 +169,20 @@ const InterviewRoom = () => {
       answer: trimmed || "(No answer submitted — time ran out)",
       timeTaken,
     });
+
+    // Safety net: if the server never responds (dropped connection, backend
+    // hang, slow AI scoring, etc.), don't leave the candidate permanently
+    // stuck with a disabled button and no way to retry.
+    clearTimeout(submitTimeoutRef.current);
+    submitTimeoutRef.current = setTimeout(() => {
+      if (submittingRef.current) {
+        submittingRef.current = false;
+        setSubmitting(false);
+        setErrorMessage(
+          "The server took too long to respond. Please try submitting again."
+        );
+      }
+    }, 20000);
   };
 
   // Countdown timer: ticks every second while a question is active and
@@ -283,6 +322,10 @@ const InterviewRoom = () => {
                 <p><b>Previous score:</b> {lastFeedback.score}/100</p>
                 <p>{lastFeedback.feedback}</p>
               </div>
+            )}
+
+            {errorMessage && (
+              <p className="submit-error-note">⚠️ {errorMessage}</p>
             )}
 
             {autoSubmitted && submitting && (
