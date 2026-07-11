@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { connectSocket, getSocket, disconnectSocket } from "../socket/socket";
 import "../candidCompStyle/InterviewRoom.css";
+import { Navigate } from "react-router-dom";
 
 
 const formatTime = (totalSeconds) => {
