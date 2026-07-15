@@ -31,7 +31,7 @@ const responseSchema = new mongoose.Schema(
     score: {
       type: Number,
       min: 0,
-      max: 10,
+      max: 100,
       default: null,
     },
 
