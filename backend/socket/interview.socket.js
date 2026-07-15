@@ -13,6 +13,31 @@ import {
 } from "../service/ai.service.js";
 
 /**
+ * Simple per-session lock. join-interview (on reconnect/refresh) and
+ * submit-answer both read-modify-save the same InterviewSession document;
+ * if they overlap, one save can clobber the other's changes and leave the
+ * candidate's browser holding a questionId the server no longer recognizes
+ * ("Question not found for this session"). Serializing access per session
+ * closes that race.
+ */
+const sessionLocks = new Map();
+
+const withSessionLock = (sessionId, fn) => {
+  const run = (sessionLocks.get(sessionId) || Promise.resolve())
+    .catch(() => {}) // don't let a previous failure jam the queue
+    .then(fn);
+
+  sessionLocks.set(sessionId, run);
+  run.finally(() => {
+    if (sessionLocks.get(sessionId) === run) {
+      sessionLocks.delete(sessionId);
+    }
+  });
+
+  return run;
+};
+
+/**
  * Socket.IO auth middleware.
  * Expects the access token to be sent as:
  *   io(URL, { auth: { token: "<accessToken>" } })
@@ -184,6 +209,7 @@ export const registerInterviewSocket = (io) => {
           throw new Error("sessionId is required");
         }
 
+        await withSessionLock(sessionId, async () => {
         const session = await InterviewSession.findOne({
           sessionToken: sessionId,
         }).populate("interviewId");
@@ -249,6 +275,7 @@ export const registerInterviewSocket = (io) => {
             candidate?.resumeText
           );
         }
+        });
       } catch (error) {
         console.error("join-interview error:", error.message);
         socket.emit("interview-error", { message: error.message });
@@ -262,6 +289,7 @@ export const registerInterviewSocket = (io) => {
           throw new Error("sessionId and questionId are required");
         }
 
+        await withSessionLock(sessionId, async () => {
         const session = await InterviewSession.findOne({
           sessionToken: sessionId,
         }).populate("interviewId");
@@ -274,9 +302,21 @@ export const registerInterviewSocket = (io) => {
           throw new Error("You are not authorized to update this interview");
         }
 
-        const response = session.responses.find(
+        let response = session.responses.find(
           (r) => r.questionId === questionId
         );
+
+        // Defensive fallback: if the exact questionId the client sent
+        // doesn't match (e.g. stale state from a reconnect that happened
+        // before this session was created), but there's still exactly one
+        // unanswered pending question, assume that's the one the candidate
+        // meant to answer instead of hard-failing the whole interview.
+        if (!response) {
+          const pending = session.responses.find((r) => r.score === null);
+          if (pending) {
+            response = pending;
+          }
+        }
 
         if (!response) {
           throw new Error("Question not found for this session");
@@ -318,7 +358,7 @@ export const registerInterviewSocket = (io) => {
         session.lastSeen = new Date();
 
         socket.emit("answer-evaluated", {
-          questionId,
+          questionId: response.questionId,
           score: response.score,
           feedback: response.feedback,
           strengths: evaluation.strengths ?? [],
@@ -332,6 +372,7 @@ export const registerInterviewSocket = (io) => {
           applyNextQuestion(io, session, session.interviewId, nextQuestionText);
           await session.save();
         }
+        });
       } catch (error) {
         console.error("submit-answer error:", error.message);
         socket.emit("interview-error", { message: error.message });
