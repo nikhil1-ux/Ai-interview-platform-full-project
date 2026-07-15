@@ -1,53 +1,68 @@
-# AI Interview Platform
+<div align="center">
 
-A full-stack, AI-powered interview platform that lets recruiters create job-description-based interviews and candidates complete AI-generated, one-shot interviews — scored and ranked automatically.
+# 🎯 AI Interview Platform
 
-**Live App:** [Add your deployed link here]
-**Repo:** https://github.com/nikhil1-ux/Ai-interview-platform-full-project
+**AI-powered recruitment platform that automates technical interviews — from resume to hiring decision.**
+
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Socket.IO](https://img.shields.io/badge/Socket.IO-Realtime-010101?logo=socket.io&logoColor=white)](https://socket.io/)
+[![Groq](https://img.shields.io/badge/AI-Groq%20%2F%20Llama%203.3-orange)](https://groq.com/)
+
+[Live Demo](https://ai-interview-platform-full-project.vercel.app/) · [Report Bug](https://github.com/nikhil1-ux/Ai-interview-platform-full-project/issues) · [Repo](https://github.com/nikhil1-ux/Ai-interview-platform-full-project)
+
+</div>
 
 ---
 
-## Overview
+## 📌 About The Project
 
-Recruiters create an interview tied to a job description. Candidates upload their resume, and the platform parses it to generate tailored technical questions using AI. Candidates complete a real-time, one-shot interview session, and their answers are automatically evaluated and scored — giving recruiters a ranked view of candidates without manual screening.
+Manual technical screening doesn't scale — recruiters spend hours conducting or reviewing interviews, and feedback quality varies by interviewer.
+
+**AI Interview Platform** solves this by letting recruiters create job-description-based interviews and automatically generating **resume-tailored, AI-driven interview questions** for candidates. Interviews run **live and one-shot** over Socket.IO with a per-question timer, and every answer is scored by AI across multiple criteria — giving recruiters a ranked, data-backed shortlist without lifting a finger.
 
 ---
 
-## Features
+## ✨ Features
 
-**For Recruiters**
-- Create and manage job-description-based interviews
-- Assign interviews to candidates and track completion status
-- View candidate performance, scores, and rankings on a dashboard
+### 🧑‍💼 Recruiters
+- Create and manage interviews tied to a specific job description
+- Assign interviews to candidates and track pipeline status (assigned → accepted → in-progress → completed/rejected)
+- View per-interview and aggregate candidate analytics on a dashboard
 - Edit/delete interviews and cancel assignments
 
-**For Candidates**
-- Upload resume (PDF/DOCX) for automated parsing
-- Take AI-generated, resume-tailored technical interview questions
-- Real-time interview session with per-question countdown timer and auto-submit
-- View performance history and ranking after completion
+### 🎓 Candidates
+- Upload resume (PDF/DOCX) — parsed automatically to ground interview questions
+- Take AI-generated technical questions tailored to their resume and the job description
+- Real-time interview session with countdown timer + auto-submit per question
+- View performance history and see ranking against other candidates
 
-**Platform**
-- JWT-based authentication with role-based access (recruiter / candidate)
+### ⚙️ Platform
+- JWT authentication with role-based access (recruiter / candidate)
 - Real-time interview flow via Socket.IO (join, submit-answer, reconnect, disconnect handling)
-- AI question generation and answer scoring (Groq via OpenAI SDK, migrated from Gemini)
-- Resume text extraction (`pdf-parse`, `mammoth`) and file storage via Cloudinary
-- Automated performance reports and recruiter analytics
+- AI question generation & answer scoring via **Groq (Llama 3.3 70B)**, accessed through the OpenAI SDK
+- Automated scoring across **technical accuracy, communication, completeness, and problem-solving**
+- AI-generated final report with **5 score dimensions** (technical, communication, confidence, problem-solving, overall) + hire/no-hire recommendation
+- MongoDB aggregation-based leaderboard ranking candidates by average score
+- Resume text extraction (`pdf-parse`, `mammoth`) with file storage on Cloudinary
 
 ---
 
-## Tech Stack
+## 🧱 Tech Stack
 
-**Frontend:** React.js, React Router, Redux Toolkit, Tailwind CSS, Socket.IO client
-**Backend:** Node.js, Express.js, Socket.IO, JWT Authentication
-**Database:** MongoDB, Mongoose
-**AI:** Groq API (via OpenAI SDK), Google Gemini API
-**File Handling:** Multer, Cloudinary, pdf-parse, mammoth
-**Deployment:** Vercel (CI/CD via GitHub)
+| Layer | Technology |
+|---|---|
+| **Frontend** | React.js, React Router, Redux Toolkit,CSS, Socket.IO client |
+| **Backend** | Node.js, Express.js, Socket.IO, JWT |
+| **Database** | MongoDB, Mongoose |
+| **AI** | Groq API (Llama 3.3 70B, via OpenAI SDK) |
+| **File Handling** | Multer, Cloudinary, pdf-parse, mammoth |
+| **Deployment** | Vercel (CI/CD via GitHub) |
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 
 ```
 Client (React)
@@ -55,24 +70,30 @@ Client (React)
    ├── REST API ──────► Express Server ──► MongoDB (Mongoose)
    │                         │
    └── Socket.IO ────────────┤
-                              ├── AI Service (Groq / Gemini) — question generation & scoring
+                              ├── AI Service (Groq) — question generation & scoring
                               └── Cloudinary — resume storage
+```
 
-Flow:
-Recruiter creates interview (JD) → Candidate uploads resume → Resume parsed (pdf-parse/mammoth)
-   → AI generates tailored questions → Candidate completes one-shot interview (Socket.IO, timed)
-   → AI scores answers → Recruiter views ranked results
+**Flow:**
+```
+Recruiter creates interview (JD)
+   → Candidate uploads resume
+   → Resume parsed (pdf-parse / mammoth)
+   → AI generates tailored questions
+   → Candidate completes timed, one-shot interview (Socket.IO)
+   → AI scores each answer
+   → Recruiter views ranked results & hiring recommendation
 ```
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v18+)
+- Node.js v18+
 - MongoDB (local or Atlas)
 - Cloudinary account
-- Groq / Gemini API key
+- Groq API key
 
 ### Installation
 
@@ -81,76 +102,61 @@ Recruiter creates interview (JD) → Candidate uploads resume → Resume parsed 
 git clone https://github.com/nikhil1-ux/Ai-interview-platform-full-project.git
 cd Ai-interview-platform-full-project
 
-# Install backend dependencies
+# Backend
 cd backend
 npm install
 
-# Install frontend dependencies
+# Frontend
 cd ../frontend
 npm install
 ```
 
 ### Environment Variables
 
-Create a `.env` file in the `backend` directory:
-
-```env
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-JWT_REFRESH_SECRET=your_refresh_secret
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-GROQ_API_KEY=your_groq_key
-GEMINI_API_KEY=your_gemini_key
+```bash
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
 ```
 
-Create a `.env` file in the `frontend` directory:
-
-```env
-VITE_API_BASE_URL=http://localhost:5000
-VITE_SOCKET_URL=http://localhost:5000
-```
-
-### Running Locally
+### Run Locally
 
 ```bash
-# Start backend (from /backend)
+# Backend (from /backend)
 npm run dev
 
-# Start frontend (from /frontend)
+# Frontend (from /frontend)
 npm run dev
 ```
 
-The app will be available at `http://localhost:5173` (frontend) with the API running on `http://localhost:5000`.
+- Frontend → `http://localhost:5173`
+- Backend API → `http://localhost:5000`
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 Ai-interview-platform-full-project/
 ├── backend/
-│   ├── controllers/       # Route logic (auth, dashboard, interview, assignment)
-│   ├── models/             # Mongoose schemas (User, Interview, Assignment, InterviewSession)
+│   ├── controllers/   # auth, dashboard, interview, resume, startInterview
+│   ├── models/         # User, Interview, Assignment, InterviewSession
 │   ├── routes/
-│   ├── sockets/            # interview.socket.js — real-time interview handler
-│   ├── services/           # AI question generation & scoring
-│   ├── middleware/         # JWT auth, error handling
+│   ├── socket/         # interview.socket.js — real-time interview handler
+│   ├── service/         # ai.service.js, resume.service.js, cloudinary.service.js
+│   ├── middleware/     # JWT auth, error handling
 │   └── server.js
 ├── frontend/
-│   ├── src/
-│   │   ├── pages/           # CandidateHome, RecruiterHome, Performance, Ranking, etc.
-│   │   ├── components/
-│   │   ├── socket/          # Singleton socket client
-│   │   └── App.jsx
+│   └── src/
+│       ├── pages/       # CandidateHome, RecruiterHome, Performance, Ranking
+│       ├── components/
+│       ├── socket/      # Socket.IO client
+│       └── App.jsx
 └── README.md
 ```
 
 ---
 
-## Roadmap
+## 🗺️ Roadmap
 
 - [ ] Video/audio response scoring (confidence, clarity, engagement)
 - [ ] TypeScript migration
@@ -159,8 +165,14 @@ Ai-interview-platform-full-project/
 
 ---
 
-## Author
+## 👤 Author
 
 **Nikhil Yadav**
 B.Tech CSE, University of Lucknow (Expected 2027)
-[GitHub](https://github.com/nikhil1-ux) · [LinkedIn](#) · nikhilyadav9044@gmail.com
+[GitHub](https://github.com/nikhil1-ux) · [LinkedIn](https://www.linkedin.com/in/nikhilyadav-dev/) · nikhilyadav9044@gmail.com
+
+---
+
+<div align="center">
+If this project helped you, consider giving it a ⭐
+</div>
